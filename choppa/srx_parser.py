@@ -1,26 +1,65 @@
-from typing import Union, Dict, List
+import regex as re
+from typing import Union, Dict, List, NamedTuple
 from xml.sax.handler import ContentHandler
 
-# from .structures import Rule, LanguageRule
-from typing import NamedTuple
+from .structures import Rule, LanguageRule, LanguageMap
 
 
-class Rule(NamedTuple):
-    is_break: bool
-    before_pattern: str
-    after_pattern: str
+class SrxDocument:
+    def __init__(self, cascade: bool = True) -> None:
+        """
+        Creates empty document.
+        cascade True if document is cascading
+        """
+        self.cascade = cascade
+        self.language_map_list: List[LanguageMap] = []
+        self.cache: Dict[str, object] = {}
 
+    def add_language_map(self, pattern: str, language_rule: LanguageRule) -> None:
+        """
+        Add language map to this document.
+        """
+        self.language_map_list.append(LanguageMap(pattern, language_rule))
 
-class LanguageRule(NamedTuple):
-    name: str
-    rules: List[Rule] = []
+    def compile(self, regex: str) -> re.Pattern:
+        key: str = "PATTERN_" + regex
 
-    def add_rule(self, rule: Rule) -> None:
-        self.rules.append(rule)
+        pattern: re.Pattern = self.cache.get(key, None)
+
+        if pattern is None:
+            pattern = re.compile(regex, flags=re.M | re.U)
+            self.cache[key] = pattern
+
+        return pattern
+
+    def get_language_rule_list(self, language_code: str) -> List[LanguageRule]:
+        """
+        If cascade is true then returns all language rules matching given
+        language code. If cascade is false returns first language rule matching
+        given language code. If no matching language rules are found returns
+        empty list.
+
+        language_code language code, for example en_US
+        matching language rules
+
+        """
+
+        matching_language_rule_list = []
+        for language_map in self.language_map_list: 
+            if language_map.matches(language_code):
+                matching_language_rule_list.append(language_map.language_rule)
+                if not self.cascade:
+                    break
+        return matching_language_rule_list
 
 
 
 class SRXHandler(ContentHandler):
+    """
+    Represents SRX 2.0 document parser. Responsible for creating and initializing
+    Document according to given SRX. Uses SAX.
+    """
+
     SCHEMA: str = "net/loomchild/segment/res/xml/srx20.xsd"
     break_rule: bool = False
     before_break: list = []
@@ -28,6 +67,9 @@ class SRXHandler(ContentHandler):
     language_rule: Union[LanguageRule, None] = None
     language_rule_map: Dict[str, LanguageRule] = {}
     element_name: Union[str, None] = None
+
+    def __init__(self, document: SrxDocument) -> None:
+        self.document = document
 
     def startDocument(self):
         self.reset_rule()
@@ -39,10 +81,9 @@ class SRXHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         self.element_name = name
-        print(f"BEGIN: <{name}>, {attrs.keys()}")
+
         if name == "header":
-            # document.setCascade(attrs.get("cascade") == "yes")
-            pass
+            self.document.cascade = attrs.get("cascade") == "yes"
         elif name == "languagerule":
             language_rule_name: str = attrs.get("languagerulename")
             self.language_rule = LanguageRule(language_rule_name)
@@ -50,29 +91,26 @@ class SRXHandler(ContentHandler):
         elif name == "languagemap":
             language_pattern: str = attrs.get("languagepattern")
             language_rule_name: str = attrs.get("languagerulename")
-            # document.addLanguageMap(language_pattern, languageRuleMap.get(language_rule_name));
+            self.document.add_language_map(language_pattern, self.language_rule_map.get(language_rule_name))
         elif name == "rule":
             self.break_rule = attrs.get("break") != "no"
 
     def endElement(self, name):
         self.element_name = None
-        print(f"END: </{name}>")
+
         if name == "rule":
             rule = Rule(self.break_rule, "".join(self.before_break), "".join(self.after_break))
             self.language_rule.add_rule(rule)
             self.reset_rule()
 
     def characters(self, content):
-        if content.strip() != "":
-            print("CONTENT:", repr(content))
-
         if self.element_name == "beforebreak":
             self.before_break.append(content)
         elif self.element_name == "afterbreak":
             self.after_break.append(content)
 
 
-if __name__ == "__main__":
-    from xml.sax import parse
+# if __name__ == "__main__":
+#     from xml.sax import parse
 
-    parse("/Users/dchaplinsky/Projects/hashek/choppa/data/example1.srx", SRXHandler())
+#     parse("/Users/dchaplinsky/Projects/choppa/data/example1.srx", SRXHandler(document=SrxDocument()))
