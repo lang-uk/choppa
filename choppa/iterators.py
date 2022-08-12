@@ -6,7 +6,7 @@ from .srx_parser import SrxDocument
 from .rule_matcher import RuleMatcher
 
 
-MAX_VALUE = 2 ** 31 - 1
+MAX_INT_VALUE: int = 2 ** 31 - 1
 
 
 class AbstractTextIterator:
@@ -15,6 +15,7 @@ class AbstractTextIterator:
     operation.
     """
 
+    DEFAULT_BUFFER_LENGTH: int = 1024 * 1024
     def to_string(self, language_rule_list: List[LanguageRule]) -> str:
         result = []
 
@@ -84,7 +85,6 @@ class AccurateSrxTextIterator(AbstractTextIterator):
             self.segment = self.text[self.start_position : self.end_position]
             self.start_position = self.end_position
 
-            print(self.segment)
             return self.segment
         else:
             raise StopIteration
@@ -132,7 +132,7 @@ class AccurateSrxTextIterator(AbstractTextIterator):
         Returns an iterator of the first match hit
         """
 
-        min_position: int = MAX_VALUE
+        min_position: int = MAX_INT_VALUE
         min_matcher: Union[RuleMatcher, None] = None
         for matcher in self.rule_matcher_list:
             if matcher.get_break_position() < min_position:

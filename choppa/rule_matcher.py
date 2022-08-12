@@ -19,17 +19,16 @@ class RuleMatcher:
         self.document: SrxDocument = document
         self.rule: Rule = rule
         self.text: str = text
+        self.text_len: int = len(text)
         self.before_pattern: re.Regex = document.compile(rule.before_pattern)
         self.after_pattern: re.Regex = document.compile(rule.after_pattern)
-        # self.before_matcher = self.before_pattern.matcher(text)
-        # self.after_matcher = self.after_pattern.matcher(text)
 
         # Adding aux variables to match the behavior of start/end regions
         # of java matcher
         self.bm_region_start: int = 0
-        self.bm_region_end: int = len(self.text)
+        self.bm_region_end: int = self.text_len
         self.am_region_start: int = 0
-        self.am_region_end: int = len(self.text)
+        self.am_region_end: int = self.text_len
         self.bm_start: int = 0
         self.am_start: int = 0
         self.am_end: int = 0
@@ -44,14 +43,27 @@ class RuleMatcher:
 
         if start is not None:
             self.bm_region_start = start
-            self.bm_region_end = len(self.text)
+            self.bm_region_end = self.text_len
 
+
+        # public boolean find() {
+        #     found = false;
+        #     while ((!found) && beforeMatcher.find()) {
+        #         afterMatcher.region(beforeMatcher.end(), text.length());
+        #         found = afterMatcher.lookingAt();
+        #     }
+        #     return found;
+        # }
+
+        # print("here", start)
         self.found = False
-        for bm_match in self.before_pattern.finditer(self.text, self.bm_region_start, self.bm_region_end):
+        bm_match = self.before_pattern.search(self.text, self.bm_region_start, self.bm_region_end)
+
+        while bm_match and not self.found:
             self.bm_start = bm_match.start()
-            self.bm_region_start = bm_match.end()
+            self.bm_region_start = bm_match.end() + 1
             self.am_region_start = bm_match.end()
-            self.am_region_end = len(self.text)
+            self.am_region_end = self.text_len
 
             am_match = self.after_pattern.match(self.text, self.am_region_start, self.am_region_end)
             if am_match:
@@ -59,8 +71,14 @@ class RuleMatcher:
                 self.am_start = am_match.start()
                 self.am_region_start = am_match.end()
                 self.am_end = am_match.end()
-            if self.found:
+
+            if self.bm_region_start == self.text_len:
                 break
+
+            bm_match = self.before_pattern.search(self.text, self.bm_region_start, self.bm_region_end)
+
+        # print(bm_match, self.found)
+        # raise Exception("Fuck you")
 
         return self.found
 

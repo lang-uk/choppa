@@ -21,10 +21,10 @@ class SrxDocument:
         """
         self.language_map_list.append(LanguageMap(pattern, language_rule))
 
-    def compile(self, regex: str) -> re.Pattern:
+    def compile(self, regex: str) -> re.Regex:
         key: str = "PATTERN_" + regex
 
-        pattern: re.Pattern = self.cache.get(key, None)
+        pattern: re.Regex = self.cache.get(key, None)
 
         if pattern is None:
             pattern = re.compile(regex, flags=re.M | re.U)
@@ -44,7 +44,7 @@ class SrxDocument:
 
         """
 
-        matching_language_rule_list = []
+        matching_language_rule_list: List[LanguageRule] = []
         for language_map in self.language_map_list: 
             if language_map.matches(language_code):
                 matching_language_rule_list.append(language_map.language_rule)
@@ -61,14 +61,14 @@ class SRXHandler(ContentHandler):
     """
 
     SCHEMA: str = "net/loomchild/segment/res/xml/srx20.xsd"
-    break_rule: bool = False
-    before_break: list = []
-    after_break: list = []
-    language_rule: Union[LanguageRule, None] = None
-    language_rule_map: Dict[str, LanguageRule] = {}
-    element_name: Union[str, None] = None
 
     def __init__(self, document: SrxDocument) -> None:
+        self.break_rule: bool = False
+        self.before_break: list = []
+        self.after_break: list = []
+        self.language_rule: Union[LanguageRule, None] = None
+        self.language_rule_map: Dict[str, LanguageRule] = {}
+        self.element_name: Union[str, None] = None
         self.document = document
 
     def startDocument(self):

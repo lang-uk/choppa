@@ -30,3 +30,15 @@ class SrxDocumentTest(unittest.TestCase):
         language_rule_list = document.get_language_rule_list("aaa")
         self.assertEqual(1, len(language_rule_list))
         self.assertEqual(language_rule1, language_rule_list[0])
+
+        document2: SrxDocument = SrxDocument()
+
+        language_rule4: LanguageRule = LanguageRule("4")
+        document2.add_language_map("aaa", language_rule4)
+
+        language_rule_list = document.get_language_rule_list("aaa")
+        self.assertEqual(1, len(language_rule_list))
+
+        language_rule_list = document2.get_language_rule_list("aaa")
+        self.assertEqual(1, len(language_rule_list))
+        self.assertEqual(language_rule4, language_rule_list[0])
