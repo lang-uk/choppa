@@ -72,6 +72,7 @@ class AccurateSrxTextIterator(AbstractTextIterator):
 
             while len(self.rule_matcher_list) and not found:
                 min_matcher: RuleMatcher = self.get_min_matcher()
+                print(min_matcher.before_pattern)
                 self.end_position = min_matcher.get_break_position()
                 if min_matcher.rule.is_break and self.end_position > self.start_position:
                     found = True
@@ -124,6 +125,7 @@ class AccurateSrxTextIterator(AbstractTextIterator):
             if matcher.get_start_position() < self.end_position:
                 matcher.find(self.end_position)
                 if matcher.hit_end():
+                    print("Removing", matcher.after_pattern, matcher.before_pattern)
                     # TODO: More optimal removal of rules
                     self.rule_matcher_list.remove(matcher)
 
@@ -137,5 +139,6 @@ class AccurateSrxTextIterator(AbstractTextIterator):
         for matcher in self.rule_matcher_list:
             if matcher.get_break_position() < min_position:
                 min_position = matcher.get_break_position()
+                print("Found smth", matcher.before_pattern, min_position)
                 min_matcher = matcher
         return min_matcher
