@@ -12,8 +12,10 @@ class JavaMatcher:
     def __init__(self, pattern: Union[str, re.Regex], text: str) -> None:
         self._text: str = text
         self._text_len: int = len(self._text)
+        self._start: int = 0
+        self._end: int = self._text_len
         self.start: int = 0
-        self.end: int = self._text_len
+        self.end: int = 0
 
         if isinstance(pattern, str):
             self.pattern = re.compile(pattern)
@@ -21,23 +23,26 @@ class JavaMatcher:
             self.pattern = pattern
 
     def region(self, start: int, end: Union[int, None] = None) -> None:
-        self.start = start
+        self._start = start
         if end is None:
-            self.end = self._text_len
+            self._end = self._text_len
         else:
-            self.end = end
+            self._end = end
 
     def _find_and_move_region(self, method: Callable) -> re.Match:
         # Special case for empty matchers
-        if self.start > self._text_len:
+        if self._start > self._text_len:
             return None
 
-        match = method(self._text, self.start, self.end)
+        match = method(self._text, self._start, self._end)
 
         if match is not None:
             # Moving to the remainder
             # Also special case for empty matchers
             self.region(match.end() + (1 if match.start() == match.end() else 0))
+
+            self.start = match.start()
+            self.end = match.end()
 
         return match
 
@@ -53,8 +58,9 @@ class JavaMatcher:
     def looking_at(self) -> re.Match:
         return self.match()
 
+
     def __str__(self) -> str:
-        return f"{self.pattern}: <{self.start}, {self.end}>"
+        return f"{self.pattern}: <{self._start}, {self._end}>"
 
 
 class RuleMatcher:
@@ -75,6 +81,8 @@ class RuleMatcher:
         self.text_len: int = len(text)
         self.before_pattern: re.Regex = document.compile(rule.before_pattern)
         self.after_pattern: re.Regex = document.compile(rule.after_pattern)
+        self.before_matcher: JavaMatcher = JavaMatcher(self.before_pattern, self.text)
+        self.after_matcher: JavaMatcher = JavaMatcher(self.after_pattern, self.text)
 
         # Adding aux variables to match the behavior of start/end regions
         # of java matcher
@@ -94,39 +102,15 @@ class RuleMatcher:
         return true if rule has been matched
         """
 
-        print(
-            self.after_pattern,
-            self.am_region_start,
-            self.am_region_end,
-            self.text[self.am_region_start : self.am_region_end],
-        )
-
         if start is not None:
-            self.bm_region_start = start
-            self.bm_region_end = self.text_len
+            self.before_matcher.region(start)
 
         self.found = False
-        bm_match = self.before_pattern.search(self.text, self.bm_region_start, self.bm_region_end)
 
-        while bm_match and not self.found:
-            self.bm_start = bm_match.start()
-            self.bm_region_start = bm_match.end() + 1
-            self.am_region_start = bm_match.end()
+        while not self.found and self.before_matcher.search():
+            self.after_matcher.region(self.before_matcher.end)
+            self.found = self.after_matcher.looking_at() is not None
 
-            am_match = self.after_pattern.match(self.text, self.am_region_start, self.am_region_end)
-            if am_match:
-                self.found = True
-                self.am_start = am_match.start()
-                self.am_region_start = am_match.end()
-                self.am_end = am_match.end()
-
-            if self.bm_region_start == self.text_len:
-                break
-
-            if self.am_region_start == self.text_len:
-                break
-
-            bm_match = self.before_pattern.search(self.text, self.bm_region_start, self.bm_region_end)
 
         return self.found
 
@@ -141,16 +125,16 @@ class RuleMatcher:
         @return position in text where the last matching starts
         """
 
-        return self.bm_start
+        return self.before_matcher.start
 
     def get_break_position(self) -> int:
         """
         @return position in text where text should be splitted according to last matching
         """
-        return self.am_start
+        return self.after_matcher.start
 
     def get_end_position(self) -> int:
         """
         @return position in text where the last matching ends
         """
-        return self.am_end
+        return self.after_matcher.end

@@ -270,65 +270,65 @@ class AbstractSrxTextIterator(unittest.TestCase):
 
         return document
 
-    # def test_simple_split(self) -> None:
-    #     self.perform_test(self.SIMPLE_RESULT, self.create_simple_document(), self.SIMPLE_LANGUAGE)
+    def test_simple_split(self) -> None:
+        self.perform_test(self.SIMPLE_RESULT, self.create_simple_document(), self.SIMPLE_LANGUAGE)
 
-    # def test_empty_text(self) -> None:
-    #     self.perform_test(self.EMPTY_RESULT, self.create_empty_document())
+    def test_empty_text(self) -> None:
+        self.perform_test(self.EMPTY_RESULT, self.create_empty_document())
 
-    # def test_alternative_rule_split(self) -> None:
-    #     self.perform_test(self.ALTERNATIVE_RULE_RESULT, self.create_alternative_rule_document())
+    def test_alternative_rule_split(self) -> None:
+        self.perform_test(self.ALTERNATIVE_RULE_RESULT, self.create_alternative_rule_document())
 
-    # def test_overlapping_rules_split(self) -> None:
-    #     self.perform_test(self.OVERLAPPING_RULES_RESULT, self.create_overlapping_rules_document())
+    def test_overlapping_rules_split(self) -> None:
+        self.perform_test(self.OVERLAPPING_RULES_RESULT, self.create_overlapping_rules_document())
 
-    # def test_interlaced_rules_split(self) -> None:
-    #     self.perform_test(self.INTERLACED_RULES_RESULT, self.create_interlaced_rules_document())
+    def test_interlaced_rules_split(self) -> None:
+        self.perform_test(self.INTERLACED_RULES_RESULT, self.create_interlaced_rules_document())
 
-    # def test_no_break_rules(self) -> None:
-    #     self.perform_test(self.NO_BREAK_RULES_RESULT, self.create_no_break_rules_document())
+    def test_no_break_rules(self) -> None:
+        self.perform_test(self.NO_BREAK_RULES_RESULT, self.create_no_break_rules_document())
 
-    # def test_infinite_negative_rule(self) -> None:
-    #     self.perform_test(self.INFINITE_NEGATIVE_RULE_RESULT, self.create_infinite_negative_rule_document())
+    def test_infinite_negative_rule(self) -> None:
+        self.perform_test(self.INFINITE_NEGATIVE_RULE_RESULT, self.create_infinite_negative_rule_document())
 
-    # def test_only_break_rules(self) -> None:
-    #     self.perform_test(self.ONLY_BREAK_RULES_RESULT, self.create_only_break_rules_document())
+    def test_only_break_rules(self) -> None:
+        self.perform_test(self.ONLY_BREAK_RULES_RESULT, self.create_only_break_rules_document())
 
-    # def test_break_at_the_end_of_text(self) -> None:
-    #     self.perform_test(self.BREAK_AT_THE_END_RESULT, self.create_break_at_the_end_document())
+    def test_break_at_the_end_of_text(self) -> None:
+        self.perform_test(self.BREAK_AT_THE_END_RESULT, self.create_break_at_the_end_document())
 
-    # def test_empty_exception_rule(self) -> None:
-    #     self.perform_test(self.EMPTY_EXCEPTION_RULE_RESULT, self.create_empty_exception_rule_document())
+    def test_empty_exception_rule(self) -> None:
+        self.perform_test(self.EMPTY_EXCEPTION_RULE_RESULT, self.create_empty_exception_rule_document())
 
-    # def test_empty_break_rule(self) -> None:
-    #     self.perform_test(self.EMPTY_BREAK_RULE_RESULT, self.create_empty_break_rule_document())
+    def test_empty_break_rule(self) -> None:
+        self.perform_test(self.EMPTY_BREAK_RULE_RESULT, self.create_empty_break_rule_document())
 
     def test_word_boundary(self) -> None:
         self.perform_test(self.WORD_BOUNDARY_RESULT, self.create_word_boundary_document(), self.WORD_BOUNDARY_LANGUAGE)
 
-    # def test_exception_rule_longer_than_break_rule(self) -> None:
-    #     self.perform_test(
-    #         self.EXCEPTION_RULE_LONGER_THAN_BREAK_RULE_RESULT,
-    #         self.create_exception_rule_longer_than_break_rule_document(),
-    #     )
+    def test_exception_rule_longer_than_break_rule(self) -> None:
+        self.perform_test(
+            self.EXCEPTION_RULE_LONGER_THAN_BREAK_RULE_RESULT,
+            self.create_exception_rule_longer_than_break_rule_document(),
+        )
 
-    # def test_matching_end(self) -> None:
-    #     self.perform_test(self.MATCHING_END_RESULT, self.create_matching_end_document())
+    def test_matching_end(self) -> None:
+        self.perform_test(self.MATCHING_END_RESULT, self.create_matching_end_document())
 
-    # def test_matching_all(self) -> None:
-    #     self.perform_test(self.MATCHING_ALL_RESULT, self.create_matching_all_document())
+    def test_matching_all(self) -> None:
+        self.perform_test(self.MATCHING_ALL_RESULT, self.create_matching_all_document())
 
-    # def test_overlapping_break_rules(self) -> None:
-    #     self.perform_test(self.OVERLAPPING_BREAK_RULES_RESULT, self.create_overlapping_break_rules_document())
+    def test_overlapping_break_rules(self) -> None:
+        self.perform_test(self.OVERLAPPING_BREAK_RULES_RESULT, self.create_overlapping_break_rules_document())
 
-    # def test_mixed_break_rules(self) -> None:
-    #     self.perform_test(self.MIXED_BREAK_RULES_RESULT, self.create_mixed_break_rules_document())
+    def test_mixed_break_rules(self) -> None:
+        self.perform_test(self.MIXED_BREAK_RULES_RESULT, self.create_mixed_break_rules_document())
 
-    # def test_text_longer_than_buffer_rules(self) -> None:
-    #     self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
+    def test_text_longer_than_buffer_rules(self) -> None:
+        self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
 
-    # def test_ticket1_rule(self) -> None:
-    #     self.perform_test(self.TICKET_1_RESULT, self.create_ticket1_document())
+    def test_ticket1_rule(self) -> None:
+        self.perform_test(self.TICKET_1_RESULT, self.create_ticket1_document())
 
-    # def test_specification_example(self) -> None:
-    #     self.perform_test(self.SPECIFICATION_EXAMPLE_RESULT, self.create_specification_example_document())
+    def test_specification_example(self) -> None:
+        self.perform_test(self.SPECIFICATION_EXAMPLE_RESULT, self.create_specification_example_document())

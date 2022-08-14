@@ -45,8 +45,8 @@ class RuleMatcherTest(unittest.TestCase):
 
         match = matcher.find()
         self.assertEqual(match, None)
-        self.assertEqual(matcher.start, 9)
-        self.assertEqual(matcher.end, 9)
+        self.assertEqual(matcher._start, 9)
+        self.assertEqual(matcher._end, 9)
 
     def test_java_matcher_looking_at(self):
         matcher: JavaMatcher = JavaMatcher(pattern=r"foo", text="foobarfoo")
@@ -57,8 +57,8 @@ class RuleMatcherTest(unittest.TestCase):
 
         match = matcher.looking_at()
         self.assertEqual(match, None)
-        self.assertEqual(matcher.start, 3)
-        self.assertEqual(matcher.end, 9)
+        self.assertEqual(matcher._start, 3)
+        self.assertEqual(matcher._end, 9)
 
         match = matcher.find()
         self.assertEqual(match.start(), 6)
