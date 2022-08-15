@@ -16,14 +16,14 @@ That port currently covers:
 * [Additional tests](https://github.com/languagetool-org/languagetool/blob/66a66e5484aaaa5794fd530da18179b0bf441250/languagetool-language-modules/uk/src/test/java/org/languagetool/tokenizers/uk/UkrainianSRXSentenceTokenizerTest.java) from LanguageTool for Ukrainian language
 * [Type hints](https://docs.python.org/3/library/typing.html)
 
-I also _pythonized_ the code to the some extend (by removing some of setters/getters, _snake_casing_ methods and variables) and adapting data structures.
+I also _pythonized_ the code to the some extend (by removing some of setters/getters, _snake_casing_ methods and variables and adapting data structures).
 
 
 # Important notes
 First and foremost, I would like to thank Jarek for his work and the quality of his code. My project is not original, it just brings the power of srx segmenter to python world. And it relies completely on the work
 done by Jarek.
 
-Please pay attention to the fact that only [Accurate iterator](https://github.com/loomchild/segment#accurate-algorithm) is currently implemented (and I don't have immediate plans to implement the rest). Accurate Iterator should work well on a relatively small documents (i.e **do not use** it on multi GB plaintext corpora!). Other iterators from original library allows to parse large documents efficiently while sacrificing some accuracy (limiting look-behind patterns, etc). If you really need it — I'm always open for the pull requests.
+Please pay attention to the fact that only [Accurate iterator](https://github.com/loomchild/segment#accurate-algorithm) is currently implemented (and I don't have immediate plans to implement the rest). Accurate Iterator should work well on a relatively small documents (i.e **do not use** it on multi GB plaintext corpora!). Other iterators from original library allows to parse large documents efficiently while sacrificing some accuracy (limiting look-behind patterns, etc). If you really need it — I'm always open for the pull requests. Similary, I've only implemented SAX reader for rules and using `xmlschema` package for schema validation. Last but not least, various readers aren't ported from the original library too, in my opinion, python already has a lot of built-in tools for that behaviour.
 
 Also, I don't have any plan of porting UI at all. You can simply reuse some of UI's available.
 
