@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+
+<!--
+  Copyright © The Localization Industry Standards Association [LISA] 2006-2008. 
+  All Rights Reserved.
+
+  This document and translations of it may be copied and furnished to others, 
+  and derivative works that comment on or otherwise explain it or assist in 
+  its implementation may be prepared, copied, published and distributed, 
+  in whole or in part, without restriction of any kind, provided that 
+  the above copyright notice and this paragraph are included on all such copies 
+  and derivative works. However, this document itself may not be modified 
+  in any way, such as by removing the copyright notice or references to LISA.
+
+  The limited permissions granted above are perpetual and will not be revoked 
+  by LISA or its successors or assigns.
+
+  This document and the information contained herein is provided on an "AS IS" 
+  basis and LISA DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT 
+  NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT 
+  INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS 
+  FOR A PARTICULAR PURPOSE. 
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ 
+
+  <xs:element name="srx">
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element ref="header" minOccurs="1" maxOccurs="1" />
+
+        <xs:element ref="body" minOccurs="1" maxOccurs="1" />
+
+      </xs:sequence>
+
+      <xs:attribute name="version" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="header">
+
+    <xs:complexType>
+
+     <xs:sequence>
+
+      <xs:element ref="formathandle" minOccurs="0" maxOccurs="3" />
+
+     </xs:sequence>
+
+      <xs:attribute name="segmentsubflows" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="formathandle">
+
+    <xs:complexType>
+
+      <xs:attribute name="type" type="xs:string" use="required" />
+
+      <xs:attribute name="include" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="body">
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element ref="languagerules" minOccurs="0" maxOccurs="1" />
+
+        <xs:element ref="maprules" minOccurs="0" maxOccurs="1" />
+
+      </xs:sequence>
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="languagerules">
+
+    <xs:complexType>
+    
+      <xs:sequence>
+
+      <xs:element ref="languagerule" minOccurs="1" maxOccurs="unbounded" />
+
+     </xs:sequence>
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="languagerule">
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element ref="rule" minOccurs="1" maxOccurs="unbounded" />
+
+      </xs:sequence>
+
+      <xs:attribute name="languagerulename" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="rule">
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element ref="beforebreak" minOccurs="0" maxOccurs="1" />
+
+        <xs:element ref="afterbreak" minOccurs="0" maxOccurs="1" />
+
+      </xs:sequence>
+
+      <xs:attribute name="break" type="xs:string" use="optional" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+  
+
+  <xs:element name="beforebreak">
+
+    <xs:complexType mixed="true" />
+
+  </xs:element>
+
+ 
+
+  <xs:element name="afterbreak">
+
+    <xs:complexType mixed="true" />
+
+  </xs:element>
+
+ 
+
+  <xs:element name="maprules">
+
+    <xs:complexType>
+    
+     <xs:sequence>
+
+      <xs:element ref="maprule" minOccurs="1" maxOccurs="unbounded" />
+
+     </xs:sequence>
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="maprule">
+
+    <xs:complexType>
+    
+     <xs:sequence>
+
+      <xs:element ref="languagemap" minOccurs="1" maxOccurs="unbounded" />
+
+     </xs:sequence>
+
+      <xs:attribute name="maprulename" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+  <xs:element name="languagemap">
+
+    <xs:complexType>
+
+      <xs:attribute name="languagepattern" type="xs:string" use="required" />
+
+      <xs:attribute name="languagerulename" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+  </xs:element>
+
+ 
+
+</xs:schema>

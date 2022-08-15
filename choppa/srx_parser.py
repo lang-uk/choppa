@@ -1,19 +1,35 @@
-import regex as re
-from typing import Union, Dict, List, NamedTuple
+import pathlib
+import regex as re  # type: ignore
 from xml.sax.handler import ContentHandler
+from xml.sax import parse as sax_parse
+
+from typing import Union, Dict, List, NamedTuple
+import xmlschema  # type: ignore
 
 from .structures import Rule, LanguageRule, LanguageMap
 
 
 class SrxDocument:
-    def __init__(self, cascade: bool = True) -> None:
+    def __init__(
+        self, cascade: bool = True, ruleset: Union[pathlib.Path, None, str] = None, validate_ruleset: Union[pathlib.Path, None, str] = None
+    ) -> None:
         """
         Creates empty document.
         cascade True if document is cascading
+        ruleset a path to the srx xml file to be loaded (supply None to start with an empty doc)
+        validate_ruleset a filepath to xsd (or None, to disable validation) to validate against DTD
         """
         self.cascade = cascade
         self.language_map_list: List[LanguageMap] = []
         self.cache: Dict[str, object] = {}
+
+        if ruleset is not None:
+            if validate_ruleset is not None:
+                schema: xmlschema.XMLSchema = xmlschema.XMLSchema(str(validate_ruleset))
+
+                schema.validate(str(ruleset))
+        
+            sax_parse(str(ruleset), SRXHandler(document=self))
 
     def add_language_map(self, pattern: str, language_rule: LanguageRule) -> None:
         """
@@ -45,7 +61,7 @@ class SrxDocument:
         """
 
         matching_language_rule_list: List[LanguageRule] = []
-        for language_map in self.language_map_list: 
+        for language_map in self.language_map_list:
             if language_map.matches(language_code):
                 matching_language_rule_list.append(language_map.language_rule)
                 if not self.cascade:
@@ -53,14 +69,11 @@ class SrxDocument:
         return matching_language_rule_list
 
 
-
 class SRXHandler(ContentHandler):
     """
     Represents SRX 2.0 document parser. Responsible for creating and initializing
     Document according to given SRX. Uses SAX.
     """
-
-    SCHEMA: str = "net/loomchild/segment/res/xml/srx20.xsd"
 
     def __init__(self, document: SrxDocument) -> None:
         self.break_rule: bool = False
