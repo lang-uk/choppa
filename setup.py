@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 
-requirements = ["regex"]
+requirements = ["regex>=2022.8.17", "xmlschema"]
 
 test_requirements = [
     # TODO: put package test requirements here
