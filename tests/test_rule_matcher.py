@@ -36,12 +36,12 @@ class RuleMatcherTest(unittest.TestCase):
         matcher: JavaMatcher = JavaMatcher(pattern=r"foo", text="foobarfoo")
 
         match = matcher.find()
-        self.assertEqual(match.start(), 0)
-        self.assertEqual(match.end(), 3)
+        self.assertEqual(matcher.start, 0)
+        self.assertEqual(matcher.end, 3)
 
         match = matcher.find()
-        self.assertEqual(match.start(), 6)
-        self.assertEqual(match.end(), 9)
+        self.assertEqual(matcher.start, 6)
+        self.assertEqual(matcher.end, 9)
 
         match = matcher.find()
         self.assertEqual(match, None)
@@ -52,8 +52,8 @@ class RuleMatcherTest(unittest.TestCase):
         matcher: JavaMatcher = JavaMatcher(pattern=r"foo", text="foobarfoo")
 
         match = matcher.looking_at()
-        self.assertEqual(match.start(), 0)
-        self.assertEqual(match.end(), 3)
+        self.assertEqual(matcher.start, 0)
+        self.assertEqual(matcher.end, 3)
 
         match = matcher.looking_at()
         self.assertEqual(match, None)
@@ -61,8 +61,8 @@ class RuleMatcherTest(unittest.TestCase):
         self.assertEqual(matcher._end, 9)
 
         match = matcher.find()
-        self.assertEqual(match.start(), 6)
-        self.assertEqual(match.end(), 9)
+        self.assertEqual(matcher.start, 6)
+        self.assertEqual(matcher.end, 9)
 
     def test_java_matcher_empty(self):
         # Emulates following behavior
@@ -77,20 +77,61 @@ class RuleMatcherTest(unittest.TestCase):
         matcher: JavaMatcher = JavaMatcher(pattern=r"", text="123")
 
         match = matcher.find()
-        self.assertEqual(match.start(), 0)
-        self.assertEqual(match.end(), 0)
+        self.assertEqual(matcher.start, 0)
+        self.assertEqual(matcher.end, 0)
 
         match = matcher.find()
-        self.assertEqual(match.start(), 1)
-        self.assertEqual(match.end(), 1)
+        self.assertEqual(matcher.start, 1)
+        self.assertEqual(matcher.end, 1)
 
         match = matcher.find()
-        self.assertEqual(match.start(), 2)
-        self.assertEqual(match.end(), 2)
+        self.assertEqual(matcher.start, 2)
+        self.assertEqual(matcher.end, 2)
 
         match = matcher.find()
-        self.assertEqual(match.start(), 3)
-        self.assertEqual(match.end(), 3)
+        self.assertEqual(matcher.start, 3)
+        self.assertEqual(matcher.end, 3)
+
+        match = matcher.find()
+        self.assertEqual(match, None)
+
+    def test_caret_matcher(self):
+        # Emulates behavior of the Java matcher, when
+        # caret matcher can match the beginning of the region
+
+        matcher: JavaMatcher = JavaMatcher(pattern=r"^\d", text="123")
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 0)
+        self.assertEqual(matcher.end, 1)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 1)
+        self.assertEqual(matcher.end, 2)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 2)
+        self.assertEqual(matcher.end, 3)
+
+
+        match = matcher.find()
+        self.assertEqual(match, None)
+
+    def test_caret_alt_matcher(self):
+        matcher: JavaMatcher = JavaMatcher(pattern=r"(^foo)|(bar)", text="foobarfoo")
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 0)
+        self.assertEqual(matcher.end, 3)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 3)
+        self.assertEqual(matcher.end, 6)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 6)
+        self.assertEqual(matcher.end, 9)
+
 
         match = matcher.find()
         self.assertEqual(match, None)

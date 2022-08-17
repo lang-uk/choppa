@@ -1,7 +1,7 @@
 import unittest
 from typing import List
 
-from xmlschema.validators.exceptions import XMLSchemaValidationError
+from xmlschema.validators.exceptions import XMLSchemaValidationError  # type: ignore
 
 from choppa.srx_parser import SrxDocument
 from choppa.structures import LanguageRule, Rule
@@ -50,10 +50,8 @@ class SrxDocumentTest(unittest.TestCase):
 
 class SrxParserTest(unittest.TestCase):
     TICKET_1_DOCUMENT_NAME: str = "data/srx/test/ticket1.srx"
-    SRX_1_DOCUMENT_NAME: str = "data/srx/test/example1.srx"
     SRX_2_DOCUMENT_NAME: str = "data/srx/test/example.srx"
     INVALID_DOCUMENT_NAME: str = "data/srx/test/invalid.srx"
-    SRX_1_XSD: str = "data/xsd/srx10.xsd"
     SRX_2_XSD: str = "data/xsd/srx20.xsd"
 
     def test_srx2(self) -> None:

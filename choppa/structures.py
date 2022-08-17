@@ -18,7 +18,8 @@ class LanguageRule:
     def add_rule(self, rule: Rule) -> None:
         self.rules.append(rule)
 
-    # TODO: __str__?
+    def __str__(self) -> str:
+        return f"<{self.name}>: {len(self.rules)}"
 
 
 class LanguageMap:
@@ -33,6 +34,7 @@ class LanguageMap:
         pattern language code pattern
         language_rule language rule
         """
+
         self.language_pattern: re.Regex = re.compile(pattern)
         self.language_rule = language_rule
 

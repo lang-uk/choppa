@@ -9,14 +9,14 @@ Shipped with `segment.srx` set of segmentation rules for different languages, cr
 That port currently covers:
 * All structures (`structures.py`) necessary for parser to operate (`Rule`, `LanguageRule`, `LanguageMap`)
 * Abstract and **Accurate legacy** iterator (`iterators.py`) which basically segments text into the chunks according to the SRX rules
-* SAX based parser (`srx_parser.py`) to read SRX rules from xml files (both SRX1.0 and SRX2.0)
+* SAX based parser (`srx_parser.py`) to read SRX rules from xml files ([**SRX2.0 only**](https://github.com/loomchild/segment#srx-file))
 * SrxDocument (again `srx_parser.py`) class which allows you to manage rules and cache regexes
 * A partial implementation of [Java Matcher class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html#method_summary), which is absent in python.
 * Tests for everything above (and beyond)
 * [Additional tests](https://github.com/languagetool-org/languagetool/blob/66a66e5484aaaa5794fd530da18179b0bf441250/languagetool-language-modules/uk/src/test/java/org/languagetool/tokenizers/uk/UkrainianSRXSentenceTokenizerTest.java) from LanguageTool for Ukrainian language
 * [Type hints](https://docs.python.org/3/library/typing.html)
 
-I also _pythonized_ the code to the some extend (by removing some of setters/getters, _snake_casing_ methods and variables and adapting data structures).
+I also _pythonized_ the code to the some extent (by removing some of setters/getters, _snake_casing_ methods and variables and adapting data structures).
 
 
 # Important notes
