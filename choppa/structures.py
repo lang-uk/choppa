@@ -13,7 +13,7 @@ class LanguageRule:
         self.name: str = name
         self.rules: List[Rule] = []
         if rules is not None:
-            self.rules = rules
+            self.rules = rules[:]
 
     def add_rule(self, rule: Rule) -> None:
         self.rules.append(rule)
