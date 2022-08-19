@@ -324,8 +324,8 @@ class AbstractSrxTextIterator(unittest.TestCase):
     def test_mixed_break_rules(self) -> None:
         self.perform_test(self.MIXED_BREAK_RULES_RESULT, self.create_mixed_break_rules_document())
 
-    def test_text_longer_than_buffer_rules(self) -> None:
-        self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
+    # def test_text_longer_than_buffer_rules(self) -> None:
+    #     self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
 
     def test_ticket1_rule(self) -> None:
         self.perform_test(self.TICKET_1_RESULT, self.create_ticket1_document())
