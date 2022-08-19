@@ -1,5 +1,5 @@
 import regex as re  # type: ignore
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 from .srx_parser import SrxDocument
 from .structures import Rule
 
@@ -16,13 +16,14 @@ class JavaMatcher:
         self._end: int = self._text_len
         self.start: int = 0
         self.end: int = 0
+        self.use_transparent_bounds = False
 
         if isinstance(pattern, str):
             self.pattern = re.compile(pattern)
         else:
             self.pattern = pattern
 
-    def region(self, start: int, end: Union[int, None] = None) -> None:
+    def region(self, start: int, end: Optional[int] = None) -> None:
         self._start = start
         if end is None:
             self._end = self._text_len
@@ -34,17 +35,40 @@ class JavaMatcher:
         if self._start > self._text_len:
             return None
 
-        # Gosh, this shit is slow on big texts but it's the only
-        # way I found to emulate ^ matching working together with the
-        # Java's Matcher.region
-        match = method(self._text[self._start:self._end])
+        match: Optional[re.Match] = None
+
+        if not self.use_transparent_bounds:
+            # Gosh, this shit is slow on big texts but it's the only
+            # way I found to emulate ^ matching working together with the
+            # Java's Matcher.region
+            match = method(self._text[self._start:self._end])
+        else:
+            for match in self.pattern.finditer(self._text):
+                match_start: int = match.start()
+
+                if method == self.pattern.match:
+                    if match_start == self._start:
+                        break
+                    elif match_start > self._start:
+                        match = None
+                        break
+
+                elif method == self.pattern.search:
+                    if match_start >= self._start:
+                        break
+            else:
+                match = None
 
         if match is not None:
             # Moving to the remainder
             # Also special case for empty matchers
 
-            self.start = self._start + match.start()
-            self.end = self._start + match.end()
+            if not self.use_transparent_bounds:
+                self.start = self._start + match.start()
+                self.end = self._start + match.end()
+            else:
+                self.start = match.start()
+                self.end = match.end()
 
             self.region(self._start + match.end() + (1 if match.start() == match.end() else 0))
 
@@ -65,73 +89,6 @@ class JavaMatcher:
 
     def __str__(self) -> str:
         return f"{self.pattern}: <{self._start}, {self._end}>"
-
-
-# class JavaMatcher:
-#     """
-#     Partial implementation of java's matcher class
-#     """
-
-#     def __init__(self, pattern: Union[str, re.Regex], text: str) -> None:
-#         self._text: str = text
-#         self._text_len: int = len(self._text)
-#         self._start: int = 0
-#         self._end: int = self._text_len
-#         self.start: int = 0
-#         self.end: int = 0
-#         self.pseudo_caret_pattern: Union[re.Regex, None] = None
-
-#         if isinstance(pattern, str):
-#             self.pattern = re.compile(pattern)
-#         else:
-#             self.pattern = pattern
-
-#         if "^" in self.pattern.pattern:
-#             # print(self.pattern.pattern.replace("^|", "").replace("^", ""))
-#             self.pseudo_caret_pattern = re.compile(self.pattern.pattern.replace("[^", "[[[").replace("^|", "").replace("^", "").replace("[[[", "[^"), self.pattern.flags)
-
-#     def region(self, start: int, end: Union[int, None] = None) -> None:
-#         self._start = start
-#         if end is None:
-#             self._end = self._text_len
-#         else:
-#             self._end = end
-
-#     def _find_and_move_region(self, method: Callable) -> re.Match:
-#         # Special case for empty matchers
-#         if self._start > self._text_len:
-#             return None
-
-#         match = method(self._text, self._start, self._end)
-
-#         if match is not None:
-#             # Moving to the remainder
-#             # Also special case for empty matchers
-#             self.region(match.end() + (1 if match.start() == match.end() else 0))
-
-#             self.start = match.start()
-#             self.end = match.end()
-
-#         return match
-
-#     def search(self) -> re.Match:
-#         if self.pseudo_caret_pattern is not None:
-#             return self._find_and_move_region(self.pseudo_caret_pattern.match)
-#         else:
-#             return self._find_and_move_region(self.pattern.search)
-
-#     def find(self) -> re.Match:
-#         return self.search()
-
-#     def match(self) -> re.Match:
-#         return self._find_and_move_region(self.pattern.match)
-
-#     def looking_at(self) -> re.Match:
-#         return self.match()
-
-
-#     def __str__(self) -> str:
-#         return f"{self.pattern}: <{self._start}, {self._end}>"
 
 class RuleMatcher:
     """
@@ -165,7 +122,7 @@ class RuleMatcher:
         self.am_end: int = 0
         self.found = True
 
-    def find(self, start: Union[int, None] = None) -> bool:
+    def find(self, start: Optional[int] = None) -> bool:
         """
         Finds next rule match after previously found.
         param start start position
@@ -208,3 +165,7 @@ class RuleMatcher:
         @return position in text where the last matching ends
         """
         return self.after_matcher.end
+
+
+    def __str__(self) -> str:
+        return f"{self.before_matcher}: {self.after_matcher}"

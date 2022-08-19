@@ -3,15 +3,19 @@ import regex as re  # type: ignore
 from xml.sax.handler import ContentHandler
 from xml.sax import parse as sax_parse
 
-from typing import Union, Dict, List, NamedTuple
+from typing import Union, Dict, List, Optional
 import xmlschema  # type: ignore
 
 from .structures import Rule, LanguageRule, LanguageMap
+from .rule_manager import RuleManager
 
 
 class SrxDocument:
     def __init__(
-        self, cascade: bool = True, ruleset: Union[pathlib.Path, None, str] = None, validate_ruleset: Union[pathlib.Path, None, str] = None
+        self,
+        cascade: bool = True,
+        ruleset: Union[pathlib.Path, None, str] = None,
+        validate_ruleset: Union[pathlib.Path, None, str] = None,
     ) -> None:
         """
         Creates empty document.
@@ -21,14 +25,15 @@ class SrxDocument:
         """
         self.cascade = cascade
         self.language_map_list: List[LanguageMap] = []
-        self.cache: Dict[str, object] = {}
+        self.regex_cache: Dict[str, re.Regex] = {}
+        self.rule_manager_cache: Dict[str, RuleManager] = {}
 
         if ruleset is not None:
             if validate_ruleset is not None:
                 schema: xmlschema.XMLSchema = xmlschema.XMLSchema(str(validate_ruleset))
 
                 schema.validate(str(ruleset))
-        
+
             sax_parse(str(ruleset), SRXHandler(document=self))
 
     def add_language_map(self, pattern: str, language_rule: LanguageRule) -> None:
@@ -38,9 +43,12 @@ class SrxDocument:
         self.language_map_list.append(LanguageMap(pattern, language_rule))
 
     def compile(self, regex: str) -> re.Regex:
+        """
+        Compiles given pattern as regex.Regex (V1), caches it
+        """
         key: str = "PATTERN_" + regex
 
-        pattern: re.Regex = self.cache.get(key, None)
+        pattern: Optional[re.Regex] = self.regex_cache.get(key, None)
 
         if pattern is None:
             # Fixing irregularities in \h\v behavior
@@ -50,9 +58,22 @@ class SrxDocument:
             regex = regex.replace(r"\h", r"\p{H}").replace(r"\v", r"\p{V}")
 
             pattern = re.compile(regex, flags=re.M | re.U | re.V1)
-            self.cache[key] = pattern
+            self.regex_cache[key] = pattern
 
         return pattern
+
+    def get_rule_manager(
+        self, language_rule_list: List[LanguageRule], max_lookbehind_construct_length: int
+    ) -> RuleManager:
+        key: str = f"RULE_MANAGER_{language_rule_list}_{max_lookbehind_construct_length}"
+
+        rule_manager: Optional[RuleManager] = self.rule_manager_cache.get(key, None)
+
+        if rule_manager is None:
+            rule_manager = RuleManager(self, language_rule_list, max_lookbehind_construct_length)
+            self.rule_manager_cache[key] = rule_manager
+
+        return rule_manager
 
     def get_language_rule_list(self, language_code: str) -> List[LanguageRule]:
         """
@@ -85,9 +106,9 @@ class SRXHandler(ContentHandler):
         self.break_rule: bool = False
         self.before_break: list = []
         self.after_break: list = []
-        self.language_rule: Union[LanguageRule, None] = None
+        self.language_rule: Optional[LanguageRule] = None
         self.language_rule_map: Dict[str, LanguageRule] = {}
-        self.element_name: Union[str, None] = None
+        self.element_name: Optional[str] = None
         self.document = document
 
     def startDocument(self):

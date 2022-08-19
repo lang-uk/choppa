@@ -1,5 +1,5 @@
-import regex as re
-from typing import NamedTuple, List, Union
+import regex as re  # type: ignore
+from typing import NamedTuple, List, Optional
 
 
 class Rule(NamedTuple):
@@ -9,7 +9,7 @@ class Rule(NamedTuple):
 
 
 class LanguageRule:
-    def __init__(self, name: str, rules: Union[List[Rule], None] = None):
+    def __init__(self, name: str, rules: Optional[List[Rule]] = None):
         self.name: str = name
         self.rules: List[Rule] = []
         if rules is not None:

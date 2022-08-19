@@ -113,7 +113,6 @@ class RuleMatcherTest(unittest.TestCase):
         self.assertEqual(matcher.start, 2)
         self.assertEqual(matcher.end, 3)
 
-
         match = matcher.find()
         self.assertEqual(match, None)
 
@@ -132,6 +131,35 @@ class RuleMatcherTest(unittest.TestCase):
         self.assertEqual(matcher.start, 6)
         self.assertEqual(matcher.end, 9)
 
-
         match = matcher.find()
         self.assertEqual(match, None)
+
+    def test_transparent_bound(self):
+        matcher: JavaMatcher = JavaMatcher(pattern=r"(?:(?<=[Pp]rof\.)(?=\s))", text="12345 Prof. foobar")
+        matcher.use_transparent_bounds = True
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 11)
+        self.assertEqual(matcher.end, 11)
+
+        matcher.region(11)
+        match = matcher.find()
+        self.assertEqual(matcher.start, 11)
+        self.assertEqual(matcher.end, 11)
+
+        matcher.region(12)
+        match = matcher.find()
+        self.assertIsNone(match)
+
+        matcher.region(0)
+        match = matcher.looking_at()
+        self.assertIsNone(match)
+
+        matcher.region(11)
+        match = matcher.find()
+        self.assertEqual(matcher.start, 11)
+        self.assertEqual(matcher.end, 11)
+
+        matcher.region(12)
+        match = matcher.find()
+        self.assertIsNone(match)

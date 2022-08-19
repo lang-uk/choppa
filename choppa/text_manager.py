@@ -1,5 +1,5 @@
 import io
-from typing import List, Union, Dict
+from typing import List, Optional, Dict
 
 
 class TextManager:
@@ -10,9 +10,9 @@ class TextManager:
 
     def __init__(
         self,
-        text: Union[str, None] = None,
-        reader: Union[None, io.TextIOBase] = None,
-        buffer_length: Union[int, None] = None,
+        text: Optional[str] = None,
+        reader: Optional[io.TextIOBase] = None,
+        buffer_length: Optional[int] = None,
     ) -> None:
 
         """
@@ -26,7 +26,7 @@ class TextManager:
 
         self.next_character: str = ""
         self.buffer_length: int = 0
-        self.reader: Union[None, io.TextIOBase] = None
+        self.reader: Optional[io.TextIOBase] = None
         self.text_initialized: bool = False
 
         # Decide on not initialied texts

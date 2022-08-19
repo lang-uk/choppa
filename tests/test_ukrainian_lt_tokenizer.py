@@ -5,7 +5,7 @@ from xmlschema.validators.exceptions import XMLSchemaValidationError  # type: ig
 
 from choppa.srx_parser import SrxDocument
 from choppa.structures import LanguageRule, Rule
-from choppa.iterators import AccurateSrxTextIterator
+from choppa.iterators import SrxTextIterator
 
 
 class SrxParserTest(unittest.TestCase):
@@ -30,22 +30,22 @@ class SrxParserTest(unittest.TestCase):
 
         self.split_helper(["Є.Бакуліна"], document)
         self.split_helper(["Є.В.Бакуліна"], document)
-        # self.split_helper(["Засідав І. П. Єрмолюк"], document)
+        self.split_helper(["Засідав І. П. Єрмолюк"], document)
         self.split_helper(["І. П. Єрмолюк скликав нараду."], document)
-        # self.split_helper(["Наша зустріч з А. Марчуком і Г. В. Тріскою відбулася в грудні минулого року."], document)
-        # self.split_helper(["Наша зустріч з А.Марчуком і М.В.Хвилею відбулася в грудні минулого року."], document)
+        self.split_helper(["Наша зустріч з А. Марчуком і Г. В. Тріскою відбулася в грудні минулого року."], document)
+        self.split_helper(["Наша зустріч з А.Марчуком і М.В.Хвилею відбулася в грудні минулого року."], document)
         self.split_helper(["Комендант преподобний С.\u00A0Мокітімі"], document)
-        # self.split_helper(["Комендант преподобний С.\u00A0С.\u00A0Мокітімі 1."], document)
-        # self.split_helper(["Комендант преподобний С.\u00A0С. Мокітімі 2."], document)
+        self.split_helper(["Комендант преподобний С.\u00A0С.\u00A0Мокітімі 1."], document)
+        self.split_helper(["Комендант преподобний С.\u00A0С. Мокітімі 2."], document)
         self.split_helper(["Склад: акад. Вернадський, проф. Харченко, доц. Семеняк."], document)
         self.split_helper(["Ів. Франко."], document)
-        # self.split_helper(["Алисов Н. В. , Хореев Б. С."], document)
+        self.split_helper(["Алисов Н. В. , Хореев Б. С."], document)
         self.split_helper(["і Г.-К. Андерсена"], document)
         self.split_helper([" — К. : Наук. думка, 1990."], document)
         self.split_helper(["Маркс К. «Показова держава»"], document)
         
-        # #   latin I
-        # self.split_helper(["М. Л. Гончарука, I. О. Денисюка"], document)
+        #   latin I
+        self.split_helper(["М. Л. Гончарука, I. О. Денисюка"], document)
         self.split_helper(["I. I. Дорошенко"], document)
 
     def test_languagetool_other_rules(self) -> None:
@@ -124,6 +124,6 @@ class SrxParserTest(unittest.TestCase):
         self.split_helper(["закрито бібліотеку української літератури.\u202f ", "Раніше відділ боротьби з екстремізмом..."], document)
 
     def split_helper(self, sentences: List[str], document: SrxDocument) -> None:
-        text_iterator: AccurateSrxTextIterator = AccurateSrxTextIterator(document, "uk_two", "".join(sentences))
+        text_iterator: SrxTextIterator = SrxTextIterator(document, "uk_two", "".join(sentences))
         segments: List[str] = list(text_iterator)
         self.assertEqual(sentences, segments)

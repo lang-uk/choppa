@@ -28,7 +28,7 @@ class TextManagerTest(unittest.TestCase):
         manager: TextManager = TextManager(reader=io.StringIO("text"), buffer_length=2)
         self.assertEqual(2, manager.buffer_length)
 
-        self.assertEquals("te", manager.get_text())
+        self.assertEqual("te", manager.get_text())
         self.assertTrue(manager.has_more_text())
 
         manager.read_text(1)
