@@ -46,7 +46,7 @@ class AbstractSrxTextIterator(unittest.TestCase):
     TICKET_1_RESULT: List[str] = ["This is a sentence. "]
     SPECIFICATION_EXAMPLE_RESULT: List[str] = ["The U.K. Prime Minister, Mr. Blair, was seen out today."]
     TEXT_LONGER_THAN_BUFFER_RESULT: List[str] = [
-        "AAAAAAAAA." for _ in range(AbstractTextIterator.DEFAULT_BUFFER_LENGTH // 2 + 20)
+        "AAAAAAAAA." for _ in range(AbstractTextIterator.DEFAULT_BUFFER_LENGTH // 10 + 20)
     ]
 
     def perform_test(self, expected_result: List[str], document: SrxDocument, language_code: str = "") -> None:
@@ -324,8 +324,8 @@ class AbstractSrxTextIterator(unittest.TestCase):
     def test_mixed_break_rules(self) -> None:
         self.perform_test(self.MIXED_BREAK_RULES_RESULT, self.create_mixed_break_rules_document())
 
-    # def test_text_longer_than_buffer_rules(self) -> None:
-    #     self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
+    def test_text_longer_than_buffer_rules(self) -> None:
+        self.perform_test(self.TEXT_LONGER_THAN_BUFFER_RESULT, self.create_text_longer_than_buffer_document())
 
     def test_ticket1_rule(self) -> None:
         self.perform_test(self.TICKET_1_RESULT, self.create_ticket1_document())
