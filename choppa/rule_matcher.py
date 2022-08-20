@@ -35,25 +35,26 @@ class JavaMatcher:
         if self._start > self._text_len:
             return None
 
+        is_match: bool = method == self.pattern.match
         match: Optional[re.Match] = None
 
         if not self.use_transparent_bounds:
             # Gosh, this shit is slow on big texts but it's the only
             # way I found to emulate ^ matching working together with the
             # Java's Matcher.region
-            match = method(self._text[self._start:self._end])
+            match = method(self._text[self._start : self._end])
         else:
-            for match in self.pattern.finditer(self._text):
+            for match in self.pattern.finditer(self._text, max(self._start - 100, 0), self._end):
                 match_start: int = match.start()
 
-                if method == self.pattern.match:
+                if is_match:
                     if match_start == self._start:
                         break
                     elif match_start > self._start:
                         match = None
                         break
 
-                elif method == self.pattern.search:
+                else:
                     if match_start >= self._start:
                         break
             else:
@@ -86,9 +87,9 @@ class JavaMatcher:
     def looking_at(self) -> re.Match:
         return self.match()
 
-
     def __str__(self) -> str:
         return f"{self.pattern}: <{self._start}, {self._end}>"
+
 
 class RuleMatcher:
     """
@@ -138,7 +139,6 @@ class RuleMatcher:
             self.after_matcher.region(self.before_matcher.end)
             self.found = self.after_matcher.looking_at() is not None
 
-
         return self.found
 
     def hit_end(self) -> bool:
@@ -165,7 +165,6 @@ class RuleMatcher:
         @return position in text where the last matching ends
         """
         return self.after_matcher.end
-
 
     def __str__(self) -> str:
         return f"{self.before_matcher}: {self.after_matcher}"
