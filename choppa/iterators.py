@@ -358,7 +358,6 @@ class SrxTextIterator(AbstractTextIterator):
 
             self.segment = self.text_manager.get_text()[self.start_position : self.end_position]
             self.start_position = self.end_position
-            # print(self.start_position)
 
             return self.segment
         else:
