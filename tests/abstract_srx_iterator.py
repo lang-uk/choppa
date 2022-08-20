@@ -46,7 +46,7 @@ class AbstractSrxTextIterator(unittest.TestCase):
     TICKET_1_RESULT: List[str] = ["This is a sentence. "]
     SPECIFICATION_EXAMPLE_RESULT: List[str] = ["The U.K. Prime Minister, Mr. Blair, was seen out today."]
     TEXT_LONGER_THAN_BUFFER_RESULT: List[str] = [
-        "AAAAAAAAA." for _ in range(AbstractTextIterator.DEFAULT_BUFFER_LENGTH // 2 + 20)
+        "AAAAAAAAA." for _ in range(AbstractTextIterator.DEFAULT_BUFFER_LENGTH // 10 + 20)
     ]
 
     def perform_test(self, expected_result: List[str], document: SrxDocument, language_code: str = "") -> None:
