@@ -8,7 +8,9 @@ Shipped with `segment.srx` set of segmentation rules for different languages, cr
 # Current status and plans
 That port currently covers:
 * All structures (`structures.py`) necessary for parser to operate (`Rule`, `LanguageRule`, `LanguageMap`)
-* Abstract and **Accurate legacy** iterator (`iterators.py`) which basically segments text into the chunks according to the SRX rules
+* Abstract, Accurate (legacy) and SrxTextIterator iterator (`iterators.py`) which basically segments text into the chunks according to the SRX rules
+* Extra classes, required for the for the SrxTextIterator (`TextManager`, `RuleManager`)
+* Some utils (`utils.py`), for regex mangling
 * SAX based parser (`srx_parser.py`) to read SRX rules from xml files ([**SRX2.0 only**](https://github.com/loomchild/segment#srx-file))
 * SrxDocument (again `srx_parser.py`) class which allows you to manage rules and cache regexes
 * A partial implementation of [Java Matcher class](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html#method_summary), which is absent in python.
@@ -23,7 +25,7 @@ I also _pythonized_ the code to the some extent (by removing some of setters/get
 First and foremost, I would like to thank Jarek for his work and the quality of his code. My project is not original, it just brings the power of srx segmenter to python world. And it relies completely on the work
 done by Jarek.
 
-Please pay attention to the fact that only [Accurate iterator](https://github.com/loomchild/segment#accurate-algorithm) is currently implemented (and I don't have immediate plans to implement the rest). Accurate Iterator should work well on a relatively small documents (i.e **do not use** it on multi GB plaintext corpora!). Other iterators from original library allows to parse large documents efficiently while sacrificing some accuracy (limiting look-behind patterns, etc). If you really need it — I'm always open for the pull requests. Similary, I've only implemented SAX reader for rules and using `xmlschema` package for schema validation. Last but not least, various readers aren't ported from the original library too, in my opinion, python already has a lot of built-in tools for that behaviour.
+Please pay attention to the fact that only [Accurate iterator](https://github.com/loomchild/segment#accurate-algorithm) and [Ultimate iterator](https://github.com/loomchild/segment#algorithm) is currently implemented (and I don't have immediate plans to implement the rest). Accurate Iterator should work well on a relatively small documents (i.e **do not use** it on multi GB plaintext corpora!), but [known for some bugs](https://github.com/loomchild/segment/issues/22). Uliimate iterator from the original library is also ported and it allows to parse large documents efficiently while sacrificing some accuracy (limiting look-behind patterns, etc). If you really need other iterators or keen to optimize that beast — I'm always open for the pull requests. Similary, I've only implemented SAX reader for rules and using `xmlschema` package for schema validation. Last but not least, various readers aren't ported from the original library too, in my opinion, python already has a lot of built-in tools for that behaviour.
 
 Also, I don't have any plan of porting UI at all. You can simply reuse some of UI's available.
 
