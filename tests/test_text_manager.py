@@ -1,18 +1,16 @@
 import unittest
 import io
-from typing import List, Union, Dict
 
 from choppa.text_manager import TextManager
 
 
 class TextManagerTest(unittest.TestCase):
     def test_char_sequence(self) -> None:
-        manager: TextManager =TextManager(text="text")
+        manager: TextManager = TextManager(text="text")
         self.assertEqual("text", manager.get_text())
         self.assertEqual(4, manager.buffer_length)
         self.assertFalse(manager.has_more_text())
 
-    
     def test_empty_string(self) -> None:
         manager: TextManager = TextManager("")
         self.assertEqual("", manager.get_text())
@@ -20,11 +18,11 @@ class TextManagerTest(unittest.TestCase):
         self.assertFalse(manager.has_more_text())
 
     def test_cannot_read_char_sequence(self) -> None:
-        manager: TextManager =TextManager(text="text")
+        manager: TextManager = TextManager(text="text")
         with self.assertRaises(AssertionError):
             manager.read_text(1)
 
-    def test_reader(self)-> None:
+    def test_reader(self) -> None:
         manager: TextManager = TextManager(reader=io.StringIO("text"), buffer_length=2)
         self.assertEqual(2, manager.buffer_length)
 
@@ -53,4 +51,3 @@ class TextManagerTest(unittest.TestCase):
         with self.assertRaises(AssertionError):
             TextManager(text="foobar", reader=io.StringIO("barfoo"))
             TextManager()
-

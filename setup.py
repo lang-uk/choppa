@@ -21,9 +21,9 @@ test_requirements = [
 
 setup(
     name="choppa",
-    version="1.0.0",
+    version="0.9.0",
     description="",
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Dmitro Chaplynskyi",
@@ -60,5 +60,5 @@ setup(
     ],
     test_suite="tests",
     tests_require=test_requirements,
-    package_data={'choppa': ['data/*.srx']},
+    package_data={'choppa': ['data/srx/*.srx', 'data/xsd/*.xsd']},
 )

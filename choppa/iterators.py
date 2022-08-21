@@ -1,6 +1,6 @@
 import io
 import regex as re  # type: ignore
-from typing import List, Union, Dict, Optional
+from typing import List, Union, Optional
 
 from .structures import LanguageRule
 from .srx_parser import SrxDocument
@@ -342,7 +342,6 @@ class SrxTextIterator(AbstractTextIterator):
                             )
 
                         self.text_manager.read_text(self.start_position)
-                        start = 0
                         self.init_matchers()
                         min_matcher = self.get_min_matcher()
 

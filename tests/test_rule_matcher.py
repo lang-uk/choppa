@@ -164,9 +164,10 @@ class RuleMatcherTest(unittest.TestCase):
         match = matcher.find()
         self.assertIsNone(match)
 
-
     def test_transparent_bound_limited_lookbehind(self):
-        matcher: JavaMatcher = JavaMatcher(pattern=r"(?:(?<=[Pp]rof\.)(?=\s))", text="".join("AAAAAAA " * 100) + "Prof. foobar")
+        matcher: JavaMatcher = JavaMatcher(
+            pattern=r"(?:(?<=[Pp]rof\.)(?=\s))", text="".join("AAAAAAA " * 100) + "Prof. foobar"
+        )
         matcher.use_transparent_bounds = True
 
         match = matcher.find()

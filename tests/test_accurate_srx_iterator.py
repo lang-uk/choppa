@@ -1,7 +1,3 @@
-import unittest
-
-from typing import List
-
 from choppa.iterators import AccurateSrxTextIterator, AbstractTextIterator
 from choppa.srx_parser import SrxDocument
 

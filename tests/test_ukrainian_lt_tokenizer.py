@@ -1,10 +1,7 @@
 import unittest
 from typing import List
 
-from xmlschema.validators.exceptions import XMLSchemaValidationError  # type: ignore
-
 from choppa.srx_parser import SrxDocument
-from choppa.structures import LanguageRule, Rule
 from choppa.iterators import SrxTextIterator
 
 
@@ -12,12 +9,16 @@ class SrxParserTest(unittest.TestCase):
     SRX_2_XSD: str = "data/xsd/srx20.xsd"
 
     def test_languagetool_rules(self) -> None:
-        document: SrxDocument = SrxDocument(ruleset="data/srx/segment_new.srx", validate_ruleset=self.SRX_2_XSD)
+        document: SrxDocument = SrxDocument(
+            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+        )
         self.assertTrue(document.cascade)
 
         self.split_helper(["Це просте речення."], document)
         self.split_helper(["Вони приїхали в Париж. ", "Але там їм геть не сподобалося."], document)
-        self.split_helper(["Панк-рок — напрям у рок-музиці, що виник у середині 1970-х рр. у США і Великобританії."], document)
+        self.split_helper(
+            ["Панк-рок — напрям у рок-музиці, що виник у середині 1970-х рр. у США і Великобританії."], document
+        )
         self.split_helper(["Разом із втечами, вже у XV ст. почастішали збройні виступи селян."], document)
         self.split_helper(["На початок 1994 р. державний борг України становив 4,8 млрд. дол. США"], document)
         self.split_helper(["4,8 млрд. дол. США. ", "Але наступного року..."], document)
@@ -25,7 +26,9 @@ class SrxParserTest(unittest.TestCase):
         self.split_helper(["на вул.\n  Сагайдачного."], document)
 
     def test_languagetool_initial_rules(self) -> None:
-        document: SrxDocument = SrxDocument(ruleset="data/srx/segment_new.srx", validate_ruleset=self.SRX_2_XSD)
+        document: SrxDocument = SrxDocument(
+            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+        )
         self.assertTrue(document.cascade)
 
         self.split_helper(["Є.Бакуліна"], document)
@@ -43,22 +46,29 @@ class SrxParserTest(unittest.TestCase):
         self.split_helper(["і Г.-К. Андерсена"], document)
         self.split_helper([" — К. : Наук. думка, 1990."], document)
         self.split_helper(["Маркс К. «Показова держава»"], document)
-        
+
         #   latin I
         self.split_helper(["М. Л. Гончарука, I. О. Денисюка"], document)
         self.split_helper(["I. I. Дорошенко"], document)
 
     def test_languagetool_other_rules(self) -> None:
-        document: SrxDocument = SrxDocument(ruleset="data/srx/segment_new.srx", validate_ruleset=self.SRX_2_XSD)
+        document: SrxDocument = SrxDocument(
+            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+        )
         self.assertTrue(document.cascade)
 
         self.split_helper(["елементів множини A. Отже, нехай"], document)
-        
+
         self.split_helper(["Опергрупа приїхала в с. Лісове."], document)
         self.split_helper(["300 р. до н. е."], document)
         self.split_helper(["З 300 р. до н.е., і по цей день."], document)
         self.split_helper(["Пролісок (рос. пролесок) — маленька квітка."], document)
-        self.split_helper(["Квітка Цісик (англ. Kvitka Cisyk також Kacey Cisyk від ініціалів К.С.); 4 квітня 1953р., Квінз, Нью-Йорк — 29 березня 1998 р., Мангеттен, Нью-Йорк) — американська співачка українського походження."], document)
+        self.split_helper(
+            [
+                "Квітка Цісик (англ. Kvitka Cisyk також Kacey Cisyk від ініціалів К.С.); 4 квітня 1953р., Квінз, Нью-Йорк — 29 березня 1998 р., Мангеттен, Нью-Йорк) — американська співачка українського походження."
+            ],
+            document,
+        )
         self.split_helper(["До Інституту ім. Глієра під'їжджає чорне авто."], document)
         self.split_helper(["До Інституту ім. акад. Вернадського."], document)
         self.split_helper(["До вулиці гетьмана Скоропадського під'їжджає чорне авто."], document)
@@ -114,14 +124,18 @@ class SrxParserTest(unittest.TestCase):
         self.split_helper(["рис. 14, Мал. 5; Арт. 88-99"], document)
 
     def test_tokenize_with_special_chars(self) -> None:
-        document: SrxDocument = SrxDocument(ruleset="data/srx/segment_new.srx", validate_ruleset=self.SRX_2_XSD)
+        document: SrxDocument = SrxDocument(
+            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+        )
 
         self.split_helper(["– С.\u202f5-7."], document)
         # still no split for initials
         self.split_helper(["товариш С.\u202fОхримович."], document)
         self.split_helper(["З особливим обуренням сприймав С.\u202f Шелухин легітимізацію"], document)
         self.split_helper(["відбув у тюрмах.\u202f", "Нещодавно письменник"], document)
-        self.split_helper(["закрито бібліотеку української літератури.\u202f ", "Раніше відділ боротьби з екстремізмом..."], document)
+        self.split_helper(
+            ["закрито бібліотеку української літератури.\u202f ", "Раніше відділ боротьби з екстремізмом..."], document
+        )
 
     def split_helper(self, sentences: List[str], document: SrxDocument) -> None:
         text_iterator: SrxTextIterator = SrxTextIterator(document, "uk_two", "".join(sentences))

@@ -44,7 +44,9 @@ class JavaMatcher:
             # Java's Matcher.region
             match = method(self._text[self._start : min(self._start + 1000, self._end)])
         else:
-            for match in self.pattern.finditer(self._text, max(self._start - 100, 0), min(self._start + 1000, self._end)):
+            for match in self.pattern.finditer(
+                self._text, max(self._start - 100, 0), min(self._start + 1000, self._end)
+            ):
                 match_start: int = match.start()
 
                 if is_match:
