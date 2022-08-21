@@ -55,31 +55,36 @@ Ready to contribute? Here's how to set up `choppa` for local development.
 
 1.  Fork the `choppa` repo on GitHub.
 
-2.  Clone your fork locally::
-
-    \$ git clone git\@github.com:your\_name\_here/choppa.git
-
+2.  Clone your fork locally:
+    ```bash
+    $ git clone git@github.com:your_name_here/choppa.git
+    ```
 3.  Install your local copy into a virtualenv.
 
-4.  Create a branch for local development::
-
-    \$ git checkout -b name-of-your-bugfix-or-feature
+4.  Create a branch for local development:
+    ```bash
+    $ git checkout -b name-of-your-bugfix-or-feature
+    ```
 
     Now you can make your changes locally.
 
-5.  Please don't forget typing!
+5.  Please don't forget the typing!
 
 6.  When you're done making changes, check that your changes pass flake8
-    and the tests, including testing other Python versions with tox::
-
-    \$ flake8 choppa tests \$ python -m pytest
-
+    and the tests, including testing other Python versions with tox:
+    ```
+    $ flake8 choppa tests
+    $ python -m pytest
+    ```
     To get flake8, just pip install them into your virtualenv.
 
 7.  Commit your changes and push your branch to GitHub::
-
-    \$ git add . \$ git commit -m "Your detailed description of your
-    changes." \$ git push origin name-of-your-bugfix-or-feature
+```
+    $ git add .
+    $ git commit -m "Your detailed description of your
+    changes."
+    $ git push origin name-of-your-bugfix-or-feature
+```
 
 8.  Submit a pull request through the GitHub website.
 
