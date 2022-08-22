@@ -1,5 +1,5 @@
 # choppa
-Partial python port of java SRX segmenter, [originally written](https://github.com/loomchild/segment) by Jarek Lipski aka `loomchild`. 
+Partial python port of java SRX segmenter, [originally written](https://github.com/loomchild/segment) by [Jarek Lipski](https://github.com/loomchild). 
 
 In a nutshell it allows you to tokenize texts into the sentences (but generally it's rule-based, so you can chop anything textual).
 
