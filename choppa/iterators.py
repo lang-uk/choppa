@@ -2,11 +2,12 @@ import io
 import regex as re  # type: ignore
 from typing import List, Union, Optional
 
-from .structures import LanguageRule
+from .structures import LanguageRule, Rule
 from .srx_parser import SrxDocument
 from .rule_matcher import RuleMatcher, JavaMatcher
 from .text_manager import TextManager
 from .rule_manager import RuleManager
+from .utils import create_lookbehind_pattern
 
 
 MAX_INT_VALUE: int = 2 ** 31 - 1
@@ -19,6 +20,9 @@ class AbstractTextIterator:
     """
 
     DEFAULT_BUFFER_LENGTH: int = 1024 * 1024
+    # Maximum length of a regular expression construct that occurs in lookbehind.
+    # Default max lookbehind construct length parameter.
+    DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH: int = 100
 
     def to_string(self, language_rule_list: List[LanguageRule]) -> str:
         result = []
@@ -36,7 +40,13 @@ class AbstractTextIterator:
 
 
 class AccurateSrxTextIterator(AbstractTextIterator):
-    def __init__(self, document: SrxDocument, language_code: str, text: str) -> None:
+    def __init__(
+        self,
+        document: SrxDocument,
+        language_code: str,
+        text: str,
+        max_lookbehind_construct_length: int = AbstractTextIterator.DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH,
+    ) -> None:
         """
         Legacy alert: this is the implementation of the legacy accurate iterator
         from the original segment package. It's been known for slow speed on a large
@@ -60,7 +70,16 @@ class AccurateSrxTextIterator(AbstractTextIterator):
         self.rule_matcher_list: List[RuleMatcher] = []
         for language_rule in self.language_rule_list:
             for rule in language_rule.rules:
-                matcher: RuleMatcher = RuleMatcher(document, rule, text)
+                if not rule.is_break:
+                    rule = Rule(
+                        is_break=rule.is_break,
+                        before_pattern=create_lookbehind_pattern(rule.before_pattern, max_lookbehind_construct_length),
+                        after_pattern=rule.after_pattern,
+                    )
+
+                matcher: RuleMatcher = RuleMatcher(
+                    document=document, rule=rule, text=text, max_lookaround_len=max_lookbehind_construct_length
+                )
                 self.rule_matcher_list.append(matcher)
 
     def __next__(self) -> str:
@@ -193,17 +212,13 @@ class SrxTextIterator(AbstractTextIterator):
     # Default margin size.
     DEFAULT_MARGIN: int = 128
 
-    # Maximum length of a regular expression construct that occurs in lookbehind.
-    # Default max lookbehind construct length parameter.
-    DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH: int = 100
-
     def __init__(
         self,
         document: SrxDocument,
         language_code: str,
         text: Union[str, io.TextIOBase],
         buffer_length: int = AbstractTextIterator.DEFAULT_BUFFER_LENGTH,
-        max_lookbehind_construct_length: int = DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH,
+        max_lookbehind_construct_length: int = AbstractTextIterator.DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH,
         margin: int = DEFAULT_MARGIN,
     ) -> None:
         """
@@ -243,7 +258,12 @@ class SrxTextIterator(AbstractTextIterator):
 
         self.rule_matcher_list: List[RuleMatcher] = []
         for rule in self.rule_manager.break_rule_list:
-            matcher: RuleMatcher = RuleMatcher(self.document, rule, self.text_manager.get_text())
+            matcher: RuleMatcher = RuleMatcher(
+                document=self.document,
+                rule=rule,
+                text=self.text_manager.get_text(),
+                max_lookaround_len=self.max_lookbehind_construct_length,
+            )
             matcher.find()
             if not matcher.hit_end():
                 self.rule_matcher_list.append(matcher)
@@ -297,9 +317,12 @@ class SrxTextIterator(AbstractTextIterator):
 
         pattern: re.Regex = self.rule_manager.get_exception_pattern(rule_matcher.rule)
         if pattern is not None:
-            matcher = JavaMatcher(pattern, self.text_manager.get_text())
+            matcher = JavaMatcher(
+                pattern=pattern,
+                text=self.text_manager.get_text(),
+                max_lookaround_len=self.max_lookbehind_construct_length,
+            )
 
-            # WTF?
             matcher.use_transparent_bounds = True
             matcher.region(rule_matcher.get_break_position())
             res: bool = bool(matcher.looking_at())

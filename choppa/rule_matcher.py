@@ -9,7 +9,7 @@ class JavaMatcher:
     Partial implementation of java's matcher class
     """
 
-    def __init__(self, pattern: Union[str, re.Regex], text: str) -> None:
+    def __init__(self, pattern: Union[str, re.Regex], text: str, max_lookaround_len: int = 100) -> None:
         self._text: str = text
         self._text_len: int = len(self._text)
         self._start: int = 0
@@ -17,6 +17,7 @@ class JavaMatcher:
         self.start: int = 0
         self.end: int = 0
         self.use_transparent_bounds = False
+        self.max_lookaround_len = max_lookaround_len
 
         if isinstance(pattern, str):
             self.pattern = re.compile(pattern)
@@ -42,10 +43,18 @@ class JavaMatcher:
             # Gosh, this shit is slow on big texts but it's the only
             # way I found to emulate ^ matching working together with the
             # Java's Matcher.region
-            match = method(self._text[self._start : min(self._start + 1000, self._end)])
+            # Pattern TEST_PATTERN = Pattern.compile("^foo");
+            # Matcher beforeMatcher = TEST_PATTERN.matcher("barfoo");
+            # System.out.println(beforeMatcher.lookingAt());
+            # beforeMatcher.region(3, 6);
+            # System.out.println(beforeMatcher.lookingAt());
+
+            match = method(self._text[self._start : min(self._start + self.max_lookaround_len, self._end)])
         else:
             for match in self.pattern.finditer(
-                self._text, max(self._start - 100, 0), min(self._start + 1000, self._end)
+                self._text,
+                max(self._start - self.max_lookaround_len, 0),
+                min(self._start + self.max_lookaround_len, self._end),
             ):
                 match_start: int = match.start()
 
@@ -98,7 +107,7 @@ class RuleMatcher:
     Represents matcher finding subsequent occurrences of one rule.
     """
 
-    def __init__(self, document: SrxDocument, rule: Rule, text: str) -> None:
+    def __init__(self, document: SrxDocument, rule: Rule, text: str, max_lookaround_len: int=100) -> None:
         """
         Creates matcher.
         rule rule which will be searched in the text
@@ -111,11 +120,12 @@ class RuleMatcher:
         self.text_len: int = len(text)
         self.before_pattern: re.Regex = document.compile(rule.before_pattern)
         self.after_pattern: re.Regex = document.compile(rule.after_pattern)
-        self.before_matcher: JavaMatcher = JavaMatcher(self.before_pattern, self.text)
-        self.after_matcher: JavaMatcher = JavaMatcher(self.after_pattern, self.text)
+        self.before_matcher: JavaMatcher = JavaMatcher(self.before_pattern, self.text, max_lookaround_len=max_lookaround_len)
+        self.after_matcher: JavaMatcher = JavaMatcher(self.after_pattern, self.text, max_lookaround_len=max_lookaround_len)
 
         # Adding aux variables to match the behavior of start/end regions
         # of java matcher
+        self.max_lookaround_len: int = max_lookaround_len
         self.bm_region_start: int = 0
         self.bm_region_end: int = self.text_len
         self.am_region_start: int = 0

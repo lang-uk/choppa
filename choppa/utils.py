@@ -62,3 +62,9 @@ def finitize(pattern: str, infinity: int) -> str:
     pattern = RANGE_PATTERN.sub("{\\1," + str(infinity) + "}", pattern)
 
     return pattern
+
+def create_lookbehind_pattern(pattern: str, max_lenght: int) -> str:
+    if not pattern:
+        return pattern
+
+    return "(?<=" + finitize(pattern, max_lenght) + ")"
