@@ -6,11 +6,11 @@ from choppa.iterators import SrxTextIterator
 
 
 class SrxParserTest(unittest.TestCase):
-    SRX_2_XSD: str = "data/xsd/srx20.xsd"
+    SRX_2_XSD: str = "choppa/data/xsd/srx20.xsd"
 
     def test_languagetool_rules(self) -> None:
         document: SrxDocument = SrxDocument(
-            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+            ruleset="choppa/data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
         )
         self.assertTrue(document.cascade)
 
@@ -27,7 +27,7 @@ class SrxParserTest(unittest.TestCase):
 
     def test_languagetool_initial_rules(self) -> None:
         document: SrxDocument = SrxDocument(
-            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+            ruleset="choppa/data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
         )
         self.assertTrue(document.cascade)
 
@@ -53,7 +53,7 @@ class SrxParserTest(unittest.TestCase):
 
     def test_languagetool_other_rules(self) -> None:
         document: SrxDocument = SrxDocument(
-            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+            ruleset="choppa/data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
         )
         self.assertTrue(document.cascade)
 
@@ -125,7 +125,7 @@ class SrxParserTest(unittest.TestCase):
 
     def test_tokenize_with_special_chars(self) -> None:
         document: SrxDocument = SrxDocument(
-            ruleset="data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
+            ruleset="choppa/data/srx/languagetool_segment.srx", validate_ruleset=self.SRX_2_XSD
         )
 
         self.split_helper(["– С.\u202f5-7."], document)

@@ -49,10 +49,10 @@ class SrxDocumentTest(unittest.TestCase):
 
 
 class SrxParserTest(unittest.TestCase):
-    TICKET_1_DOCUMENT_NAME: str = "data/srx/test/ticket1.srx"
-    SRX_2_DOCUMENT_NAME: str = "data/srx/test/example.srx"
-    INVALID_DOCUMENT_NAME: str = "data/srx/test/invalid.srx"
-    SRX_2_XSD: str = "data/xsd/srx20.xsd"
+    TICKET_1_DOCUMENT_NAME: str = "choppa/data/srx/test/ticket1.srx"
+    SRX_2_DOCUMENT_NAME: str = "choppa/data/srx/test/example.srx"
+    INVALID_DOCUMENT_NAME: str = "choppa/data/srx/test/invalid.srx"
+    SRX_2_XSD: str = "choppa/data/xsd/srx20.xsd"
 
     def test_srx2(self) -> None:
         document: SrxDocument = SrxDocument(ruleset=self.SRX_2_DOCUMENT_NAME, validate_ruleset=self.SRX_2_XSD)
