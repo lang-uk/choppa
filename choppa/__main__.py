@@ -13,5 +13,6 @@ document: SrxDocument = SrxDocument(ruleset=ruleset, validate_ruleset=SRX_2_XSD)
 if sys.stdin.isatty():
     print('reading from stdin...', file=sys.stderr)
 
-for text in SrxTextIterator(document, "uk_two", sys.stdin.read()):
-    print(text)
+for line in sys.stdin:
+    for text in SrxTextIterator(document, "uk_two", line.strip()):
+        print(text)
