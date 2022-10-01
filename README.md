@@ -1,9 +1,21 @@
 # choppa
-Partial python port of java SRX segmenter, [originally written](https://github.com/loomchild/segment) by [Jarek Lipski](https://github.com/loomchild). 
+Partial python port of java SRX segmenter, [originally written](https://github.com/loomchild/segment) by [Jarek Lipski](https://github.com/loomchild).
 
 In a nutshell, it allows you to tokenize texts into sentences (but generally, it's rule-based so that you can chop anything textual).
 
 Shipped with `segment.srx` set of segmentation rules for different languages, crafted by the great team of [languagetool](https://github.com/languagetool-org/languagetool).
+
+# Quick Start
+
+```bash
+pip3 install git+https://github.com/lang-uk/choppa.git
+
+cat << EOF | python3 -m choppa
+Жоден сучасний електронний прилад не обходиться без мікрочипів. Мікрочіп, інакше кажучи, мікросхема - це набір електронних схем на невеликому плоскому шматку кремнію.
+EOF
+```
+
+See [choppa/__main__.py](choppa/__main__.py) for a Python usage example.
 
 # Current status and plans
 That port currently covers:
