@@ -5,10 +5,10 @@ from choppa.srx_parser import SrxDocument
 from choppa.iterators import SrxTextIterator
 
 
-ruleset = Path(__file__).parent / "data/srx/segment_new.srx"
+ruleset = Path(__file__).parent / "data/srx/languagetool_segment.srx"
 SRX_2_XSD = Path(__file__).parent / "data/xsd/srx20.xsd"
 
-document: SrxDocument = SrxDocument(ruleset=ruleset, validate_ruleset=SRX_2_XSD)
+document = SrxDocument(ruleset=ruleset, validate_ruleset=SRX_2_XSD)
 
 if sys.stdin.isatty():
     print('reading from stdin...', file=sys.stderr)
