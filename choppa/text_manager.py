@@ -1,5 +1,5 @@
 import io
-from typing import List, Optional, Dict
+from typing import Optional
 
 
 class TextManager:
@@ -115,6 +115,7 @@ class TextManager:
         return result
 
     # TODO: verify that it works properly with stdin
+
 
 #     /**
 #      * Reads specified amount of characters. It is needed because when

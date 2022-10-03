@@ -76,10 +76,9 @@ class SrxParserTest(unittest.TestCase):
 
     def test_srx2_invalid(self) -> None:
         with self.assertRaises(XMLSchemaValidationError):
-            document: SrxDocument = SrxDocument(ruleset=self.INVALID_DOCUMENT_NAME, validate_ruleset=self.SRX_2_XSD)
+            SrxDocument(ruleset=self.INVALID_DOCUMENT_NAME, validate_ruleset=self.SRX_2_XSD)
 
-
-    def test_srx2_ticket1(self)-> None:
+    def test_srx2_ticket1(self) -> None:
         document: SrxDocument = SrxDocument(ruleset=self.TICKET_1_DOCUMENT_NAME, validate_ruleset=self.SRX_2_XSD)
 
         self.assertTrue(document.cascade)

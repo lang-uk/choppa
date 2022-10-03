@@ -48,6 +48,7 @@ class AbstractSrxTextIterator(unittest.TestCase):
     TEXT_LONGER_THAN_BUFFER_RESULT: List[str] = [
         "AAAAAAAAA." for _ in range(AbstractTextIterator.DEFAULT_BUFFER_LENGTH // 10 + 20)
     ]
+    UKRAINIAN_RULES_RESULT: List[str] = ["Алисов Н. В. , Хореев Б. С."]
 
     def perform_test(self, expected_result: List[str], document: SrxDocument, language_code: str = "") -> None:
 
@@ -270,6 +271,17 @@ class AbstractSrxTextIterator(unittest.TestCase):
 
         return document
 
+    def create_ukrainian_rules_document(self) -> SrxDocument:
+        language_rule: LanguageRule = LanguageRule("")
+
+        language_rule.add_rule(Rule(False, "[\\h\\v][А-ЯІЇЄҐ]\\.[\\h\\v]*", "[А-ЯІЇЄҐ]\\.|[\\h\\v]*,"))
+        language_rule.add_rule(Rule(True, "\\.[\\h\\v]+", ""))
+
+        document: SrxDocument = SrxDocument()
+        document.add_language_map(".*", language_rule)
+
+        return document
+
     def test_simple_split(self) -> None:
         self.perform_test(self.SIMPLE_RESULT, self.create_simple_document(), self.SIMPLE_LANGUAGE)
 
@@ -332,3 +344,6 @@ class AbstractSrxTextIterator(unittest.TestCase):
 
     def test_specification_example(self) -> None:
         self.perform_test(self.SPECIFICATION_EXAMPLE_RESULT, self.create_specification_example_document())
+
+    def test_ukrainian_rules_split(self) -> None:
+        self.perform_test(self.UKRAINIAN_RULES_RESULT, self.create_ukrainian_rules_document())
