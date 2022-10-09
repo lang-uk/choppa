@@ -50,6 +50,13 @@ class JavaMatcher:
             # System.out.println(beforeMatcher.lookingAt());
 
             match = method(self._text[self._start : min(self._start + self.max_lookaround_len, self._end)])
+
+            if match is not None:
+                self.start = self._start + match.start()
+                self.end = self._start + match.end()
+
+                self.region(self._start + max(match.end(), 1))
+
         else:
             for match in self.pattern.finditer(
                 self._text,
@@ -71,18 +78,11 @@ class JavaMatcher:
             else:
                 match = None
 
-        if match is not None:
-            # Moving to the remainder
-            # Also special case for empty matchers
-
-            if not self.use_transparent_bounds:
-                self.start = self._start + match.start()
-                self.end = self._start + match.end()
-            else:
+            if match is not None:
                 self.start = match.start()
                 self.end = match.end()
 
-            self.region(self._start + match.end() + (1 if match.start() == match.end() else 0))
+                self.region(match.end() + max(match.end() - match.start(), 1))
 
         return match
 

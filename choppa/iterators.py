@@ -80,6 +80,10 @@ class AccurateSrxTextIterator(AbstractTextIterator):
                 matcher: RuleMatcher = RuleMatcher(
                     document=document, rule=rule, text=text, max_lookaround_len=max_lookbehind_construct_length
                 )
+
+                if not rule.is_break:
+                    matcher.before_matcher.use_transparent_bounds = True
+
                 self.rule_matcher_list.append(matcher)
 
     def __next__(self) -> str:
