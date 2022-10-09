@@ -95,6 +95,59 @@ class RuleMatcherTest(unittest.TestCase):
         match = matcher.find()
         self.assertEqual(match, None)
 
+    def test_java_matcher_only_lookbehind(self):
+        matcher: JavaMatcher = JavaMatcher(pattern=r"(?<=1)", text="111")
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 1)
+        self.assertEqual(matcher.end, 1)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 2)
+        self.assertEqual(matcher.end, 2)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 3)
+        self.assertEqual(matcher.end, 3)
+
+        match = matcher.find()
+        self.assertEqual(match, None)
+
+    def test_java_matcher_only_lookbehind_multimatch(self):
+        matcher: JavaMatcher = JavaMatcher(pattern=r"(?<=[\h\v][A-Z]\.[\h\v]{0,10})", text="Aaaa A. B. , Bbbbb A. B.")
+        matcher.use_transparent_bounds = True
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 7)
+        self.assertEqual(matcher.end, 7)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 8)
+        self.assertEqual(matcher.end, 8)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 10)
+        self.assertEqual(matcher.end, 10)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 11)
+        self.assertEqual(matcher.end, 11)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 21)
+        self.assertEqual(matcher.end, 21)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 22)
+        self.assertEqual(matcher.end, 22)
+
+        match = matcher.find()
+        self.assertEqual(matcher.start, 24)
+        self.assertEqual(matcher.end, 24)
+
+        match = matcher.find()
+        self.assertEqual(match, None)
+
     def test_caret_matcher(self):
         # Emulates behavior of the Java matcher, when
         # caret matcher can match the beginning of the region
