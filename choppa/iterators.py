@@ -4,7 +4,7 @@ from typing import List, Union, Optional
 
 from .structures import LanguageRule, Rule
 from .srx_parser import SrxDocument
-from .rule_matcher import RuleMatcher, JavaMatcher
+from .rule_matcher import RuleMatcher, JavaMatcher, SimpleRuleMatcher
 from .text_manager import TextManager
 from .rule_manager import RuleManager
 from .utils import create_lookbehind_pattern
@@ -77,9 +77,7 @@ class AccurateSrxTextIterator(AbstractTextIterator):
                         after_pattern=rule.after_pattern,
                     )
 
-                matcher: RuleMatcher = RuleMatcher(
-                    document=document, rule=rule, text=text, max_lookaround_len=max_lookbehind_construct_length
-                )
+                matcher: RuleMatcher = SimpleRuleMatcher(document=document, rule=rule, text=text)
                 self.rule_matcher_list.append(matcher)
 
     def __next__(self) -> str:

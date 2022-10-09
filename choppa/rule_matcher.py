@@ -180,3 +180,75 @@ class RuleMatcher:
 
     def __str__(self) -> str:
         return f"{self.before_matcher}: {self.after_matcher}"
+
+class SimpleRuleMatcher:
+    """
+    Represents pure Python matcher finding subsequent occurrences of one rule.
+    """
+
+    def __init__(self, document: SrxDocument, rule: Rule, text: str) -> None:
+        """
+        Creates matcher.
+        rule rule which will be searched in the text
+        text text
+        """
+
+        self.document: SrxDocument = document
+        self.rule: Rule = rule
+        self.text: str = text
+        self.before_pattern: re.Regex = document.compile(rule.before_pattern)
+        self.after_pattern: re.Regex = document.compile(rule.after_pattern)
+        self.found = True
+
+        self.start_position = 0
+        self.break_position = 0
+        self.end_position = 0
+        self.next_position = 0
+
+    def find(self, start: Optional[int] = None) -> bool:
+        """
+        Finds next rule match after previously found.
+        param start start position
+        return true if rule has been matched
+        """
+
+        if start is not None:
+            self.next_position = start
+
+        self.found = False
+
+        while (not self.found) and (self.next_position < len(self.text)) and (before_match := self.before_pattern.search(self.text, self.next_position)) is not None:
+            self.start_position = before_match.start()
+            self.break_position = before_match.end()
+            self.next_position = self.break_position + 1
+            after_match = self.after_pattern.match(self.text, self.break_position)
+            if after_match:
+                self.end_position = after_match.end()
+                self.found = True
+
+        return self.found
+
+    def hit_end(self) -> bool:
+        """
+        @return true if end of text has been reached while searching
+        """
+        return not self.found
+
+    def get_start_position(self) -> int:
+        """
+        @return position in text where the last matching starts
+        """
+
+        return self.start_position
+
+    def get_break_position(self) -> int:
+        """
+        @return position in text where text should be splitted according to last matching
+        """
+        return self.break_position
+
+    def get_end_position(self) -> int:
+        """
+        @return position in text where the last matching ends
+        """
+        return self.end_position
