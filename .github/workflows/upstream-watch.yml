@@ -40,5 +40,5 @@ jobs:
           TITLE="Upstream segment.srx has drifted from the bundled snapshot"
           OPEN=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq length)
           if [ "$OPEN" = "0" ]; then
-            gh issue create --title "$TITLE" --body "LanguageTool master's segment.srx no longer matches choppa/data/srx/languagetool_segment.srx (latest upstream change: ${{ steps.diff.outputs.latest }}). Refresh per choppa/data/srx/PROVENANCE.md, re-run the test suite and the corpus differential, and update PROVENANCE.md."
+            gh issue create --title "$TITLE" --body "LanguageTool master's segment.srx no longer matches choppa/data/srx/languagetool_segment.srx (latest upstream change: ${{ steps.diff.outputs.latest }}). Update choppa/data/srx/LT_COMMIT to the new upstream commit, refresh per choppa/data/srx/PROVENANCE.md, and re-run the test suite and the corpus differential."
           fi

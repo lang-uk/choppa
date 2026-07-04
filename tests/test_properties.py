@@ -3,18 +3,14 @@ Property-based tests: structural invariants that must hold for ANY
 input, not just the example cases.
 """
 
-import functools
 import io
 import unittest
 
 from hypothesis import given, settings, strategies as st
 
-from choppa import DEFAULT_SRX_RULESET, SrxDocument, SrxTextIterator
+from choppa import SrxTextIterator
 
-
-@functools.lru_cache(maxsize=1)
-def get_document() -> SrxDocument:
-    return SrxDocument(ruleset=DEFAULT_SRX_RULESET)
+from .conftest import get_document
 
 
 # Surrogates cannot appear in well-formed str input.

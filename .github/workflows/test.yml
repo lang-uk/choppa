@@ -46,6 +46,12 @@ jobs:
         run: |
           curl -sL -o segment.zip https://github.com/loomchild/segment/releases/download/2.0.3/segment-2.0.3.zip
           unzip -q segment.zip
+      - name: Assert bundled rules match the pinned LanguageTool commit
+        run: |
+          PINNED=$(tr -d '[:space:]' < choppa/data/srx/LT_COMMIT)
+          [[ "$PINNED" =~ ^[0-9a-f]{40}$ ]] || { echo "bad pin: $PINNED"; exit 1; }
+          curl -sfL -o pinned.srx "https://raw.githubusercontent.com/languagetool-org/languagetool/$PINNED/languagetool-core/src/main/resources/org/languagetool/resource/segment.srx"
+          cmp pinned.srx choppa/data/srx/languagetool_segment.srx
       - name: Byte-identity gate vs Java segment
         run: |
           segment-2.0.3/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \
