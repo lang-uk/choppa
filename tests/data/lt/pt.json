@@ -1,0 +1,273 @@
+{
+ "language": "pt",
+ "source": "PortugueseSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Cola o teu próprio texto aqui."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Cola o teu próprio texto aqui. ",
+    "Ou verifica este texto."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Esta é a primeira frase.Esta é a segunda."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Brasil é um país muito grande. ",
+    "Tem muitos estados e cidades."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hoje está fazendo muito calor. ",
+    "Vamos tomar sorvete. ",
+    "Que boa ideia!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Você gosta de futebol? ",
+    "Eu adoro!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Sr. João foi ao mercado."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A Sra. Silva mora na Rua das Flores."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Dr. Carlos atendeu o paciente ontem."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A Dra. Ana é especialista em pediatria."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Prof. Souza deu uma aula excelente."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Comprei frutas, legumes, etc. no supermercado."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "São precisos documentos, certidões, etc. para o processo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Havia problemas de logística, infraestrutura, etc. ",
+    "Tudo precisava ser resolvido."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Comprei maçãs, peras, laranjas, etc. ",
+    "Depois fui para casa."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O endereço é Av. Paulista, 1000."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Moro na R. das Flores, n.º 25."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Consulte o cap. 3 para mais informações."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Veja a fig. 2 abaixo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O evento ocorreu em jan. de 2023."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O contrato foi assinado ontem. ",
+    "Depois foi registrado em cartório."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Prof. Silva chegou tarde. ",
+    "A aula começou com atraso."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Consulte o Dr. Almeida. ",
+    "Ele poderá ajudá-lo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Você viu o filme? ",
+    "Eu achei incrível!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Como você está? ",
+    "Estou bem, obrigado."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Que dia bonito! ",
+    "Vamos passear no parque."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Será que vai chover? ",
+    "Melhor levar guarda-chuva."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Não sei o que dizer... ",
+    "É uma situação muito difícil."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ele hesitou por um momento... e então decidiu partir."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ele viria ... ?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ele viria, ... ?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O 1.º lugar foi do Brasil."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A 2.ª colocada foi a Argentina. ",
+    "O 3.º lugar ficou com o Uruguai."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O evento começa às 10.30 e termina às 12.00."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O texto tem 3.500 palavras ao todo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J. K. Rowling é a autora de Harry Potter."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O presidente L. I. Lula assinou o decreto. ",
+    "Será implementado em breve."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Vou embora!\", avisou ela. ",
+    "Todos ficaram tristes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Não aguento mais!\", gritou ela. ",
+    "Todos olharam."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Acesse o site em http://www.exemplo.com.br para mais informações."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O Brasil ganhou! ",
+    "Que festa incrível! ",
+    "Todos comemoraram."
+   ]
+  }
+ ]
+}

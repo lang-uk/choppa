@@ -1,0 +1,30 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e .[test]
+      - name: Run tests
+        run: pytest tests/ -q
+      - name: CLI smoke test
+        # No trailing newline on the input: segments preserve input bytes
+        # exactly, so a trailing \n would stay inside the last segment and
+        # print as an extra blank line.
+        run: |
+          printf 'Перше речення. Друге речення!' | choppa -l uk_two | tee out.txt
+          printf 'Перше речення. \nДруге речення!\n' | diff - out.txt

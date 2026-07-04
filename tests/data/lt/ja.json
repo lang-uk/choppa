@@ -1,0 +1,69 @@
+{
+ "language": "ja",
+ "source": "JapaneseSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "これはテスト用の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これはテスト用の文です。",
+    "追加のテスト用の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これは、テスト用の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "テスト用の文です！",
+    "追加のテスト用の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "テスト用の文です... ",
+    "追加のテスト用の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "アドレスはhttp://www.test.deです。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これは(!)の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これは(!!)の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これは(?)の文です。"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "これは(??)の文です。"
+   ]
+  }
+ ]
+}

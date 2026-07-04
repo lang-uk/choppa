@@ -1,0 +1,30 @@
+{
+ "language": "ar",
+ "source": "ArabicSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "مشوار التعلم طويل."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "هل ستنام الليلة؟"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "قُل: توْأمٌ، وتوْأمانِ: وقلْ: هذانِ توْأمانِ.. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "قلْ: هذِهِ توْأمُ «هذا»، (وقلْ: هذِهِ توْأمةُ هذا)، وقلْ: هذانِ توْأمٌ!"
+   ]
+  }
+ ]
+}

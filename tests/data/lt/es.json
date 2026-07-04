@@ -1,0 +1,477 @@
+{
+ "language": "es",
+ "source": "SpanishSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Esto es una frase. ",
+    "Esto es otra frase."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Esto es una frase.[34] ",
+    "Esto es otra frase."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "¿Nos vamos? ",
+    "Hay que irse."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "¿Vamos? ",
+    "Hay que irse."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "¡Corre! ",
+    "Hay que irse."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "1. Artículo primero"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Entonces... apareció él."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Entonces… apareció él."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Entoncess… ",
+    "Apareció él."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«El tal del tal…» sale de aquí"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "invitarle –cuando sea–… a tomar café."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A la atención de A. Comes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A la atenció de À. Comes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Núm. operación 220130000138."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "N. operación 220130000138."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "N.º operación 220130000138."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "las Sras. diputadas"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "No Mr. Spock sino otro."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ver el cap. 24 del libro."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ver el cap. IX del libro."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vive en el núm. 24 de la calle."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El Dr. Joan no vendrá."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Distingguido Sr. Juan,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Muy Hble. Sr. Presidente"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "de San Nicolás (del s. XII; coro gótico del s. XIV) y de San Mateo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "fue el 5o. clasificado."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Fue el 5º. ",
+    "Y el otro el 4º."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Art. 2.1: Estarán obligados..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hasta las pp. 50-52."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hasta las pp. XI-XII."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "y es del vol. 3 de la colección"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En EE.UU."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En EE. UU. por los DD. HH. después de los JJ. OO."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En U.S.A. años 30."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En U. S. A. años 30."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "P. ej. esto."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ahora p. ej. esto."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ahora p. e. esto."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Son las 5hrs. del domingo."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Son las 2as. jornadas."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En EE.UU. esto no pasa."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En EE. UU. esto no pasa."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Me voy a EE. UU. ",
+    "Buen viaje."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Uno (ca. 2010), dos (c. 2011), tres (ca. XIX), cuatro (c. XX)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ayto. de Madrid."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "¿Quién sabe hablar francés mejor: Tom o Mary?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hola, Albert: ",
+    "Me puedes decir tu correo?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "LanguageTooler GmbH recaudará de tu cuenta a través de GoCardless Ltd. la cantidad debajo mencionada."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El fruto es una nuez de 6 a 8 cm de long. y 4 a 6 cm de ancho"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Geiger (Proc. Roy. Soc. 1 de febrero de 1910)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Es la resolución No. 2 del parlamento,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Con un dto. del 50 %"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "DTO. 50%"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "DTO. DEL 50%"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ayto. del Ferrol"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En el ayto. del municipio."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Compré 6 Ltrs. de leche."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mi profesora trabaja los lun., mié. y vie.; los juev. y los dom., no."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Esto pasa el PP. ",
+    "Pero, por otra parte,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Cebolla, ajo, calabaza, etc. ",
+    "Compramos en fruitería."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "1 500 m/s. ",
+    "Nacen en"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Son de 1 g. ",
+    "Han sido acondicionadas."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Son de 1 m. ",
+    "Han sido acondicionadas."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vivían 50 h. ",
+    "Después el pueblo creció."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El acto será a las 15.30 h. de la tarde."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Se calcula un Vol. aproximado de 3.5 ml."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Se aplicaron 5 cc. de anestesia local durante el procedimiento."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El dispositivo opera a 2400 MHz. lo que garantiza una conexión estable."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El paciente fue evaluado tras 12 hr. de observación continua."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El medicamento se administró pb. dos veces al día."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La reunión se realizará en la 3a. sala del edificio principal."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El informe médico indica Dx. confirmado de neumonía."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Cursó la lic. en Administración de Empresas."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Cursó la Lic. En Administración de Empresas."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "cuando G.Oueddei se convierte en líder"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El jesuita alemán J.E. Nithard"
+   ]
+  }
+ ]
+}

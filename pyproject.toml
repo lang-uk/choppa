@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "choppa-srx"
+version = "1.0.0"
+description = "SRX sentence segmenter: Python port of the Java segment library, with LanguageTool's segmentation rules"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [
+    { name = "Dmytro Chaplynskyi", email = "chaplinsky.dmitry@gmail.com" },
+]
+keywords = [
+    "sentence tokenizer",
+    "sentence splitter",
+    "segmentation",
+    "srx",
+    "natural language processing",
+    "languagetool",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Natural Language :: Ukrainian",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+dependencies = [
+    "regex>=2022.8.17",
+    "xmlschema",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+choppa = "choppa.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/lang-uk/choppa"
+Repository = "https://github.com/lang-uk/choppa"
+Issues = "https://github.com/lang-uk/choppa/issues"
+Changelog = "https://github.com/lang-uk/choppa/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["choppa"]
+
+[tool.setuptools.package-data]
+choppa = ["data/srx/*.srx", "data/srx/PROVENANCE.md", "data/xsd/*.xsd", "py.typed"]

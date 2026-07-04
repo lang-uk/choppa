@@ -1,0 +1,414 @@
+{
+ "language": "nl",
+ "source": "DutchSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit is een zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit is een zin. ",
+    "Nog een."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Een zin! ",
+    "Nog een."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "‘Dat meen je niet!’ kirde Mandy."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Een zin... ",
+    "Nog een."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'En nu.. daden!' aan premier Mark Rutte."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Op http://www.test.de vind je een website."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De brief is op 3-10 gedateerd."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De brief is op 31-1 gedateerd."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De brief is op 3-10-2000 gedateerd."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vandaag is het 13-12-2004."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Op 24.09 begint het."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Om 17:00 begint het."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "In paragraaf 3.9.1 is dat beschreven."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Januari jl. is dat vastgelegd."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Appel en pruimen enz. werden gekocht."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De afkorting n.v.t. betekent niet van toepassing."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Bla et al. blah blah."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dat is,, of het is bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dat is het.. ",
+    "Zo gaat het verder."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit hier is een(!) zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit hier is een(!!) zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit hier is een(?) zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit hier is een(???) zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dit hier is een(???) zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Als voetballer wordt hij nooit een prof. ",
+    "Maar prof. N.A.W. Th.Ch. Janssen wordt dat wel."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dat was het: helemaal niets."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dat was het: het is een nieuwe zin."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jan zei: \"Hallo.\""
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jan zei: “Hallo.”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Hallo,” zei Jan, „waar ga je naartoe?”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Gisteren”, zei Jan, „was het veel beter weer.”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jan zei: „Annette zei ‚Hallo’.”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jan zei: “Annette zei ‘Hallo’.”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jan zei: «Annette zei ‹Hallo›.»"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Wegens zijn „ziekte” hoefde hij niet te werken."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "de letter „a”"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "het woord „beta” is afkomstig van ..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De voorzitter zei: 'Ik zie hier geen been in.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De voorzitter zei: \"Ik zie hier geen been in.\""
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De koning zei: \"Ik herinner me nog dat iemand 'Vive la république' riep tijdens mijn eedaflegging.\""
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De koning zei: 'Ik herinner me nog dat iemand \"Vive la république\" riep tijdens mijn eedaflegging.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De koning zei: 'Ik herinner me nog dat iemand 'Vive la république' riep tijdens mijn eedaflegging.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Otto dacht: wat een nare verhalen hoor je toch tegenwoordig."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ik vrees', zei Rob, 'dat de brug zal instorten.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ieder land', aldus minister Powell, 'moet rekenschap afleggen over de wijze waarop het zijn burgers behandelt.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Zeg Rob,' vroeg Jolanda, 'denk jij dat de brug zal instorten?'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Deze man heeft er niets mee te maken,' aldus korpschef Jan de Vries, 'maar hij heeft momenteel geen leven.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ik vrees,' zei Rob, 'dat de brug zal instorten.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ieder land,' aldus minister Powell, 'moet rekenschap afleggen over de wijze waarop het zijn burgers behandelt.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Zeg Rob,' vroeg Jolanda, 'denk jij dat de brug zal instorten?'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Deze man heeft er niets mee te maken,' aldus korpschef Jan de Vries, 'maar hij heeft momenteel geen leven.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Zij antwoordde: 'Ik denk niet dat ik nog langer met je om wil gaan.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Zij fluisterde iets van 'eeuwig trouw' en 'altijd blijven houden van'."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Heb je dat boek al gelezen?', vroeg hij."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De auteur vermeldt: 'Deze opvatting van het vorstendom heeft lang doorgewerkt.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Gaat u zitten', zei zij. ",
+    "'De dokter komt zo.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Mijn broer woont ook in Den Haag', vertelde ze. ",
+    "'Hij woont al een paar jaar samen.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Je bent grappig', zei ze. ",
+    "'Echt, ik vind je grappig.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Is Jan thuis?', vroeg Piet. ",
+    "'Ik wil hem wat vragen.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ik denk er niet over!', riep ze. ",
+    "'Dat gaat echt te ver, hoor!'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Ik vermoed', zei Piet, 'dat Jan al wel thuis is.'"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Het is een .Net programma. ",
+    "Of een .NEt programma."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Het is een .Net-programma. ",
+    "Of een .NEt-programma."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "SP werd in 2001 de sp.a (Socialistische Partij Anders) en heet sinds 2021 Vooruit."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "SP.A grijpt terug naar naam met geschiedenis: VOORUIT."
+   ]
+  }
+ ]
+}

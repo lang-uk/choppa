@@ -1,0 +1,318 @@
+{
+ "language": "fr",
+ "source": "FrenchSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris ?!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris ?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis      Chris ?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris ..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris …"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Votre nom: Chris !"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis (...) Chris"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris (Christopher?)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris (Christopher ?)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris (Christopher ?!)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis E. Macron de France."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J'ai beaucoup d'amis (Tom, Lisa, ...)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J'ai beaucoup d'amis (Tom, Lisa, ... )."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J'ai beaucoup d'amis (Tom, Lisa, …)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La fréquence des P.A. et le nombre de fibres recrutées."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mrs. America est une mini-série américaine créée par Dahvi Waller, diffusée depuis le 15 avril 2020 sur le site de VOD Hulu et la chaîne FX."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Il travaille pour Tiffany & Co. à Paris."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J'ai beaucoup d'amis (Tom, Lisa, ...) et je suis populaire !"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "J'ai beaucoup d'amis (Tom, Lisa !) et je suis populaire !"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ph.D. est un groupe de musique britannique."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Google Inc. est une entreprise américaine"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Le discours de E. Philippe devrait nous éclairer (un peu, beaucoup, ...?) sur ce qui nous attend."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Le discours de E. Philippe devrait nous éclairer (un peu, beaucoup, ...?) sur ce qui nous attend."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Op. cit., op. cit."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "IVe siècle av. J.C. en architecture"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "IVe siècle av. J.C. en architecture"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "IVe siècle av. J.-C. en architecture"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "sa mort le 19 août 14 apr. J.-C."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris.[4] ",
+    "Je suis Chris."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je suis Chris.[4] ",
+    "Je suis Chris."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "gaffa.org"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Notice BnF de l'éd. Jean Marx."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "L'Éducation nationale, impr. par ordre de la Convention nationale, Reprod. de l'éd. de : [Paris]."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Le discours de E. Philippe devrait nous éclairer (un peu, beaucoup, …?) sur ce qui nous attend."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Le discours de E. Philippe devrait nous éclairer (un peu, beaucoup, … ?) sur ce qui nous attend."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Comment ça va … ?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "« Le film était bien ? » ",
+    "« Il était énorme ! ",
+    "J'ai eu mal au ventre tellement je me suis marré ! »"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Si « cf. » désigne l’abréviation de « confer »"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "« Le film était bien ? » ",
+    "« Il était énorme ! ",
+    "J'ai eu mal au ventre tellement je me suis marré ! »"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Si « cf. » désigne l’abréviation de « confer »,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ça ne sert à rien de me dire « Salut, comment ça va ? » si tu n'as rien d'autre à dire."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "« Madame est dans sa chambre. » dit le serviteur."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "« L'État, c'est moi ! » dit le roi."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Je ferai ça... un autre jour."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Qu'en dites-vous ?, demanda-t-il."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Qu'en dites-vous ? demanda-t-il."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Qu'en dites-vous ! demanda-t-il."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Première phrase.Deuxième phrase."
+   ]
+  }
+ ]
+}

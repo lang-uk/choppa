@@ -1,0 +1,354 @@
+{
+ "language": "sk",
+ "source": "SlovakSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "This is a sentence. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz. ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ein Satz! ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ein Satz... ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Unter http://www.test.de gibt es eine Website."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das ist,, also ob es bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das ist es.. ",
+    "So geht es weiter."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(!) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(!!) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(?) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(???) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(???) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das war es: gar nichts."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das war es: Dies ist ein neuer Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Here's a"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Here's a sentence. ",
+    "And here's one that's not comp"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Prezydent jest niemądry”. ",
+    "Tak wyszło."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Prezydent jest niemądry”, powiedział premier"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 3.10. datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 31.1. datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 3.10.2000 datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Toto 2. vydanie bolo rozobrané za 1,5 roka."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Festival Bažant Pohoda slávi svoje 10. výročie."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dlho odkladané parlamentné voľby v Angole sa uskutočnia 5. septembra."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das in Punkt 3.9.1 genannte Verhalten."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aké sú skutočné príčiny tzv. transformačných príznakov?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aké príplatky zamestnancovi (napr. za nadčas) stanovuje Zákonník práce?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Počas neprítomnosti zastupuje MUDr. Marianna Krupšová."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Staroveký Egypt vznikol okolo r. 3150 p.n.l. (tzn. 3150 pred Kr.). ",
+    "A zanikol v r. 31 pr. Kr."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Temperatura wody w systemie wynosi 30°C.",
+    "W skład obiegu otwartego wchodzi zbiornik i armatura."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Zabudowano kolumny o długości 45 m. ",
+    "Woda z ujęcia jest dostarczana do zakładu."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Najlepszym polskim reżyserem był St. Różewicz. ",
+    "Chodzi o brata wielkiego poety."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Nore M. hrozí za podvod 10 až 15 rokov."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest zmienna A.",
+    "Zaś to jest zmienna B."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mam w magazynie dwie skrzynie LMD20. ",
+    "Jestem żołnierzem i wiem, jak można ich użyć"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Rytmem tej wiecznie przemijającej światowej egzystencji […] rytmem mesjańskiej natury jest szczęście."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "This is a sentence. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "This is a sentence. ",
+    "And this is another one."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "This is a sentence.",
+    "Isn't it?",
+    "Yes, it is."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Don't split strings like U. S. A. either."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Don't split strings like U.S.A. either."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Don't split... ",
+    "Well you know. ",
+    "Here comes more text."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Don't split... well you know. ",
+    "Here comes more text."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "The \".\" should not be a delimiter in quotes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Here he comes!\" she said."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Here he comes!\", she said."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Here he comes.\" ",
+    "But this is another sentence."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "\"Here he comes!\". ",
+    "That's what he said."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "The sentence ends here. ",
+    "(Another sentence.)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "He won't go. ",
+    "Really."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "He won't say no.",
+    "Not really."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "This is it: a test."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "James is from the Ireland!",
+    "He lives in Spain now."
+   ]
+  }
+ ]
+}

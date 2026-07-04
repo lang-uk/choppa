@@ -1,0 +1,13 @@
+{
+ "language": "lt",
+ "source": "LithuanianSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Linux – laisvos operacinės sistemos branduolio (kernel) pavadinimas. ",
+    "Dažnai taip sutrumpintai vadinama ir bendrai visa Unix-tipo operacinė sistema naudojanti Linux branduolį kartu su sisteminėmis programomis bei bibliotekomis iš GNU projekto."
+   ]
+  }
+ ]
+}

@@ -8,25 +8,41 @@ import xmlschema  # type: ignore
 
 from .structures import Rule, LanguageRule, LanguageMap
 from .rule_manager import RuleManager
+from .utils import translate_java_regex
 
 
 class SrxDocument:
+    # V1 enables Java-style character class operations like
+    # [\p{L}&&[^rwn]] used by the LanguageTool rules. MULTILINE is
+    # deliberately NOT set: java.util.regex does not use it, so with it
+    # the ^-anchored rules would fire at every line start and the output
+    # would diverge from the original segment/LanguageTool behavior.
+    BASE_PATTERN_FLAGS: int = re.U | re.V1
+
     def __init__(
         self,
         cascade: bool = True,
         ruleset: Union[pathlib.Path, None, str] = None,
         validate_ruleset: Union[pathlib.Path, None, str] = None,
+        pattern_flags: int = 0,
     ) -> None:
         """
         Creates empty document.
         cascade True if document is cascading
         ruleset a path to the srx xml file to be loaded (supply None to start with an empty doc)
         validate_ruleset a filepath to xsd (or None, to disable validation) to validate against DTD
+        pattern_flags extra regex flags OR-ed into every compiled rule
+            (analog of segment 2.0.4 defaultPatternFlags). For example,
+            pass regex.M to make ^-anchored rules match at line starts
+            (pre-1.0 choppa behavior, diverges from Java).
         """
         self.cascade = cascade
+        self.pattern_flags: int = self.BASE_PATTERN_FLAGS | pattern_flags
         self.language_map_list: List[LanguageMap] = []
         self.regex_cache: Dict[str, re.Regex] = {}
         self.rule_manager_cache: Dict[str, RuleManager] = {}
+        # Keyed by (language_code, cascade); cleared when a map is added.
+        self.language_rule_cache: Dict[tuple, List[LanguageRule]] = {}
 
         if ruleset is not None:
             if validate_ruleset is not None:
@@ -41,23 +57,18 @@ class SrxDocument:
         Add language map to this document.
         """
         self.language_map_list.append(LanguageMap(pattern, language_rule))
+        self.language_rule_cache.clear()
 
     def compile(self, regex: str) -> re.Regex:
         """
         Compiles given pattern as regex.Regex (V1), caches it
         """
-        key: str = "PATTERN_" + regex
+        key: str = f"PATTERN_{self.pattern_flags}_{regex}"
 
         pattern: Optional[re.Regex] = self.regex_cache.get(key, None)
 
         if pattern is None:
-            # Fixing irregularities in \h\v behavior
-            # Both \p{H} and \p{V} were added in regex 2022.8.17
-            # More details can be found here:
-            # https://github.com/mrabarnett/mrab-regex/issues/477#issuecomment-1218409217
-            regex = regex.replace(r"\h", r"\p{H}").replace(r"\v", r"\p{V}")
-
-            pattern = re.compile(regex, flags=re.M | re.U | re.V1)
+            pattern = re.compile(translate_java_regex(regex), flags=self.pattern_flags)
             self.regex_cache[key] = pattern
 
         return pattern
@@ -87,12 +98,19 @@ class SrxDocument:
 
         """
 
+        cache_key = (language_code, self.cascade)
+        cached = self.language_rule_cache.get(cache_key)
+        if cached is not None:
+            return cached
+
         matching_language_rule_list: List[LanguageRule] = []
         for language_map in self.language_map_list:
             if language_map.matches(language_code):
                 matching_language_rule_list.append(language_map.language_rule)
                 if not self.cascade:
                     break
+
+        self.language_rule_cache[cache_key] = matching_language_rule_list
         return matching_language_rule_list
 
 

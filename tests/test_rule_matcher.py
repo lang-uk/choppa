@@ -1,13 +1,14 @@
 import unittest
-from choppa.rule_matcher import RuleMatcher, JavaMatcher
+from choppa.rule_matcher import RuleMatcher
 from choppa.srx_parser import SrxDocument, Rule
 
 
 class RuleMatcherTest(unittest.TestCase):
     def test_rule_matcher(self):
+        # Port of net.loomchild.segment.srx.RuleMatcherTest.testFind
         document: SrxDocument = SrxDocument()
         rule: Rule = Rule(True, "ab+", "ca+")
-        text: text = "abaabbcabcabcaa"
+        text: str = "abaabbcabcabcaa"
         matcher: RuleMatcher = RuleMatcher(document, rule, text)
         self.assertFalse(matcher.hit_end())
         self.assertTrue(matcher.find())
@@ -32,167 +33,91 @@ class RuleMatcherTest(unittest.TestCase):
         self.assertEqual(9, matcher.get_break_position())
         self.assertEqual(11, matcher.get_end_position())
 
-    def test_java_matcher_find(self):
-        matcher: JavaMatcher = JavaMatcher(pattern=r"foo", text="foobarfoo")
+    def test_zero_length_matches(self):
+        # An exception rule wrapped in lookbehind (as done by both
+        # iterators) produces zero-width before-matches; the matcher must
+        # advance past them the way java.util.regex.Matcher.find() does.
+        document: SrxDocument = SrxDocument()
+        rule: Rule = Rule(True, r"(?<=[A-Z]\.\s?)", "")
+        text: str = "XA. B."
+        matcher: RuleMatcher = RuleMatcher(document, rule, text)
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 0)
-        self.assertEqual(matcher.end, 3)
+        self.assertFalse(matcher.hit_end())
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 6)
-        self.assertEqual(matcher.end, 9)
+        self.assertTrue(matcher.find())
+        self.assertFalse(matcher.hit_end())
+        self.assertEqual(3, matcher.get_start_position())
+        self.assertEqual(3, matcher.get_break_position())
+        self.assertEqual(3, matcher.get_end_position())
 
-        match = matcher.find()
-        self.assertEqual(match, None)
-        self.assertEqual(matcher._start, 9)
-        self.assertEqual(matcher._end, 9)
+        self.assertTrue(matcher.find())
+        self.assertFalse(matcher.hit_end())
+        self.assertEqual(4, matcher.get_start_position())
+        self.assertEqual(4, matcher.get_break_position())
+        self.assertEqual(4, matcher.get_end_position())
 
-    def test_java_matcher_looking_at(self):
-        matcher: JavaMatcher = JavaMatcher(pattern=r"foo", text="foobarfoo")
+        self.assertTrue(matcher.find())
+        self.assertFalse(matcher.hit_end())
+        self.assertEqual(6, matcher.get_start_position())
+        self.assertEqual(6, matcher.get_break_position())
+        self.assertEqual(6, matcher.get_end_position())
 
-        match = matcher.looking_at()
-        self.assertEqual(matcher.start, 0)
-        self.assertEqual(matcher.end, 3)
+        self.assertFalse(matcher.find())
+        self.assertTrue(matcher.hit_end())
 
-        match = matcher.looking_at()
-        self.assertEqual(match, None)
-        self.assertEqual(matcher._start, 3)
-        self.assertEqual(matcher._end, 9)
+        self.assertTrue(matcher.find(2))
+        self.assertEqual(3, matcher.get_start_position())
+        self.assertEqual(3, matcher.get_break_position())
+        self.assertEqual(3, matcher.get_end_position())
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 6)
-        self.assertEqual(matcher.end, 9)
+    def test_adjacent_matches(self):
+        # java.util.regex.Matcher.find() restarts at the END of the
+        # previous match (not end + 1), so a following match starting
+        # exactly at the previous end must be found. Guards against the
+        # unconditional +1 advancement bug.
+        document: SrxDocument = SrxDocument()
+        rule: Rule = Rule(True, r"\.", "")
+        text: str = "a..b"
+        matcher: RuleMatcher = RuleMatcher(document, rule, text)
 
-    def test_java_matcher_empty(self):
-        # Emulates following behavior
-        # Pattern EMPTY_PATTERN = Pattern.compile("");
-        # Matcher beforeMatcher = EMPTY_PATTERN.matcher("123");
+        self.assertTrue(matcher.find())
+        self.assertEqual(1, matcher.get_start_position())
+        self.assertEqual(2, matcher.get_break_position())
 
-        # while (beforeMatcher.find()) {
-        #     System.out.println(beforeMatcher.start());
-        #     System.out.println(beforeMatcher.end());
-        # }
+        self.assertTrue(matcher.find())
+        self.assertEqual(2, matcher.get_start_position())
+        self.assertEqual(3, matcher.get_break_position())
 
-        matcher: JavaMatcher = JavaMatcher(pattern=r"", text="123")
+        self.assertFalse(matcher.find())
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 0)
-        self.assertEqual(matcher.end, 0)
+    def test_empty_pattern_walks_every_position(self):
+        # Java: an empty pattern matches at every position 0..len(text).
+        document: SrxDocument = SrxDocument()
+        rule: Rule = Rule(True, "", "")
+        text: str = "123"
+        matcher: RuleMatcher = RuleMatcher(document, rule, text)
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 1)
-        self.assertEqual(matcher.end, 1)
+        for expected in range(len(text) + 1):
+            self.assertTrue(matcher.find())
+            self.assertEqual(expected, matcher.get_break_position())
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 2)
-        self.assertEqual(matcher.end, 2)
+        self.assertFalse(matcher.find())
+        self.assertTrue(matcher.hit_end())
 
-        match = matcher.find()
-        self.assertEqual(matcher.start, 3)
-        self.assertEqual(matcher.end, 3)
+    def test_lookbehind_sees_before_start(self):
+        # pattern.match(text, pos) keeps the left bound transparent, the
+        # same as Java's useTransparentBounds(true) + lookingAt() used for
+        # exception-rule matching.
+        document: SrxDocument = SrxDocument()
+        rule: Rule = Rule(True, r"(?:(?<=[Pp]rof\.)(?=\s))", "")
+        text: str = "12345 Prof. foobar"
+        matcher: RuleMatcher = RuleMatcher(document, rule, text)
 
-        match = matcher.find()
-        self.assertEqual(match, None)
+        self.assertTrue(matcher.find())
+        self.assertEqual(11, matcher.get_start_position())
+        self.assertEqual(11, matcher.get_break_position())
 
-    def test_caret_matcher(self):
-        # Emulates behavior of the Java matcher, when
-        # caret matcher can match the beginning of the region
+        self.assertTrue(matcher.find(11))
+        self.assertEqual(11, matcher.get_break_position())
 
-        matcher: JavaMatcher = JavaMatcher(pattern=r"^\d", text="123")
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 0)
-        self.assertEqual(matcher.end, 1)
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 1)
-        self.assertEqual(matcher.end, 2)
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 2)
-        self.assertEqual(matcher.end, 3)
-
-        match = matcher.find()
-        self.assertEqual(match, None)
-
-    def test_caret_alt_matcher(self):
-        matcher: JavaMatcher = JavaMatcher(pattern=r"(^foo)|(bar)", text="foobarfoo")
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 0)
-        self.assertEqual(matcher.end, 3)
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 3)
-        self.assertEqual(matcher.end, 6)
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 6)
-        self.assertEqual(matcher.end, 9)
-
-        match = matcher.find()
-        self.assertEqual(match, None)
-
-    def test_transparent_bound(self):
-        matcher: JavaMatcher = JavaMatcher(pattern=r"(?:(?<=[Pp]rof\.)(?=\s))", text="12345 Prof. foobar")
-        matcher.use_transparent_bounds = True
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 11)
-        self.assertEqual(matcher.end, 11)
-
-        matcher.region(11)
-        match = matcher.find()
-        self.assertEqual(matcher.start, 11)
-        self.assertEqual(matcher.end, 11)
-
-        matcher.region(12)
-        match = matcher.find()
-        self.assertIsNone(match)
-
-        matcher.region(0)
-        match = matcher.looking_at()
-        self.assertIsNone(match)
-
-        matcher.region(11)
-        match = matcher.find()
-        self.assertEqual(matcher.start, 11)
-        self.assertEqual(matcher.end, 11)
-
-        matcher.region(12)
-        match = matcher.find()
-        self.assertIsNone(match)
-
-    def test_transparent_bound_limited_lookbehind(self):
-        matcher: JavaMatcher = JavaMatcher(
-            pattern=r"(?:(?<=[Pp]rof\.)(?=\s))", text="".join("AAAAAAA " * 100) + "Prof. foobar",
-            max_lookaround_len=1000
-        )
-        matcher.use_transparent_bounds = True
-
-        match = matcher.find()
-        self.assertEqual(matcher.start, 805)
-        self.assertEqual(matcher.end, 805)
-
-        matcher.region(805)
-        match = matcher.find()
-        self.assertEqual(matcher.start, 805)
-        self.assertEqual(matcher.end, 805)
-
-        matcher.region(806)
-        match = matcher.find()
-        self.assertIsNone(match)
-
-        matcher.region(0)
-        match = matcher.looking_at()
-        self.assertIsNone(match)
-
-        matcher.region(805)
-        match = matcher.find()
-        self.assertEqual(matcher.start, 805)
-        self.assertEqual(matcher.end, 805)
-
-        matcher.region(806)
-        match = matcher.find()
-        self.assertIsNone(match)
+        self.assertFalse(matcher.find(12))

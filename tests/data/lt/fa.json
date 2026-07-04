@@ -1,0 +1,46 @@
+{
+ "language": "fa",
+ "source": "PersianSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "این یک جمله است. ",
+    "جملهٔ بعدی"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "آیا این یک جمله است؟ ",
+    "جملهٔ بعدی"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "یک جمله!!! ",
+    "جملهٔ بعدی"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "جملهٔ اول... خوب نیست؟ ",
+    "جملهٔ دوم."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "جملهٔ اول (...) ادامهٔ متن. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "جملهٔ اول [...] ادامهٔ متن. "
+   ]
+  }
+ ]
+}
