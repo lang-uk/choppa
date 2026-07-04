@@ -28,3 +28,27 @@ jobs:
         run: |
           printf 'Перше речення. Друге речення!' | choppa -l uk_two | tee out.txt
           printf 'Перше речення. \nДруге речення!\n' | diff - out.txt
+
+  java-identity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install
+        run: pip install -e .
+      - name: Fetch the Java segment reference implementation
+        run: |
+          curl -sL -o segment.zip https://github.com/loomchild/segment/releases/download/2.0.3/segment-2.0.3.zip
+          unzip -q segment.zip
+      - name: Byte-identity gate vs Java segment
+        run: |
+          segment-2.0.3/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \
+            -l uk_two -r -i tests/data/ci_corpus/uk_wikipedia.txt -o java.txt -e $'\x01'
+          python scripts/benchmark.py tests/data/ci_corpus/uk_wikipedia.txt \
+            --language uk_two --java java.txt
