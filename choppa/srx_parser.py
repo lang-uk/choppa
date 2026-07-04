@@ -10,20 +10,69 @@ from .structures import Rule, LanguageRule, LanguageMap
 from .rule_manager import RuleManager
 
 
+# Java-only regex constructs that have to be translated before the pattern
+# can be compiled by the regex package. The lookbehind guard (same idiom as
+# in utils.py) makes sure we only touch constructs preceded by an even
+# number of backslashes, i.e. we never rewrite an escaped literal backslash
+# followed by "h"/"v".
+#
+# \h and \v are Java's horizontal/vertical whitespace classes; in Python
+# patterns \v is the literal LINE TABULATION escape, so both are mapped to
+# the equivalent \p{H}/\p{V} properties added to the regex package in
+# 2022.8.17 (https://github.com/mrabarnett/mrab-regex/issues/477).
+# \p{H}/\p{V} match Java's classes exactly, while the regex package's own
+# \h misses U+180E.
+#
+# (?U) is Java's UNICODE_CHARACTER_CLASS inline flag (used by LanguageTool
+# rules to fix the JDK >= 19 \b regression); Python character classes are
+# Unicode-aware by default for str patterns, so the flag is dropped.
+JAVA_CONSTRUCT_PATTERN: re.Regex = re.compile(
+    r"(?<=(?<!\\)(?:\\\\){0,100})(?:\\h|\\v)|\(\?U\)"
+)
+JAVA_CONSTRUCT_REPLACEMENTS: Dict[str, str] = {
+    r"\h": r"\p{H}",
+    r"\v": r"\p{V}",
+    "(?U)": "",
+}
+
+
+def translate_java_regex(pattern: str) -> str:
+    """
+    Translates Java-only regex constructs (\\h, \\v, (?U)) into their
+    Python regex-package equivalents. See JAVA_CONSTRUCT_PATTERN above.
+    """
+    return JAVA_CONSTRUCT_PATTERN.sub(
+        lambda match: JAVA_CONSTRUCT_REPLACEMENTS[match.group()], pattern
+    )
+
+
 class SrxDocument:
+    # V1 enables Java-style character class operations like
+    # [\p{L}&&[^rwn]] used by the LanguageTool rules. MULTILINE is
+    # deliberately NOT set: java.util.regex does not use it, so with it
+    # the ^-anchored rules would fire at every line start and the output
+    # would diverge from the original segment/LanguageTool behavior.
+    BASE_PATTERN_FLAGS: int = re.U | re.V1
+
     def __init__(
         self,
         cascade: bool = True,
         ruleset: Union[pathlib.Path, None, str] = None,
         validate_ruleset: Union[pathlib.Path, None, str] = None,
+        pattern_flags: int = 0,
     ) -> None:
         """
         Creates empty document.
         cascade True if document is cascading
         ruleset a path to the srx xml file to be loaded (supply None to start with an empty doc)
         validate_ruleset a filepath to xsd (or None, to disable validation) to validate against DTD
+        pattern_flags extra regex flags OR-ed into every compiled rule
+            (analog of segment 2.0.4 defaultPatternFlags). For example,
+            pass regex.M to make ^-anchored rules match at line starts
+            (pre-1.0 choppa behavior, diverges from Java).
         """
         self.cascade = cascade
+        self.pattern_flags: int = self.BASE_PATTERN_FLAGS | pattern_flags
         self.language_map_list: List[LanguageMap] = []
         self.regex_cache: Dict[str, re.Regex] = {}
         self.rule_manager_cache: Dict[str, RuleManager] = {}
@@ -51,13 +100,7 @@ class SrxDocument:
         pattern: Optional[re.Regex] = self.regex_cache.get(key, None)
 
         if pattern is None:
-            # Fixing irregularities in \h\v behavior
-            # Both \p{H} and \p{V} were added in regex 2022.8.17
-            # More details can be found here:
-            # https://github.com/mrabarnett/mrab-regex/issues/477#issuecomment-1218409217
-            regex = regex.replace(r"\h", r"\p{H}").replace(r"\v", r"\p{V}")
-
-            pattern = re.compile(regex, flags=re.M | re.U | re.V1)
+            pattern = re.compile(translate_java_regex(regex), flags=self.pattern_flags)
             self.regex_cache[key] = pattern
 
         return pattern

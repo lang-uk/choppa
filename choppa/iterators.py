@@ -4,7 +4,7 @@ from typing import List, Union, Optional
 
 from .structures import LanguageRule, Rule
 from .srx_parser import SrxDocument
-from .rule_matcher import RuleMatcher, JavaMatcher
+from .rule_matcher import RuleMatcher
 from .text_manager import TextManager
 from .rule_manager import RuleManager
 from .utils import create_lookbehind_pattern
@@ -77,9 +77,7 @@ class AccurateSrxTextIterator(AbstractTextIterator):
                         after_pattern=rule.after_pattern,
                     )
 
-                matcher: RuleMatcher = RuleMatcher(
-                    document=document, rule=rule, text=text, max_lookaround_len=max_lookbehind_construct_length
-                )
+                matcher: RuleMatcher = RuleMatcher(document=document, rule=rule, text=text)
                 self.rule_matcher_list.append(matcher)
 
     def __next__(self) -> str:
@@ -262,7 +260,6 @@ class SrxTextIterator(AbstractTextIterator):
                 document=self.document,
                 rule=rule,
                 text=self.text_manager.get_text(),
-                max_lookaround_len=self.max_lookbehind_construct_length,
             )
             matcher.find()
             if not matcher.hit_end():
@@ -317,16 +314,16 @@ class SrxTextIterator(AbstractTextIterator):
 
         pattern: re.Regex = self.rule_manager.get_exception_pattern(rule_matcher.rule)
         if pattern is not None:
-            matcher = JavaMatcher(
-                pattern=pattern,
-                text=self.text_manager.get_text(),
-                max_lookaround_len=self.max_lookbehind_construct_length,
+            # Java: matcher.useTransparentBounds(true);
+            #       matcher.region(breakPosition, length);
+            #       return !matcher.lookingAt();
+            # Python's pattern.match(text, pos) is the exact equivalent:
+            # the match is anchored at pos and lookbehind constructs can
+            # see the text before pos (transparent left bound).
+            return (
+                pattern.match(self.text_manager.get_text(), rule_matcher.get_break_position())
+                is None
             )
-
-            matcher.use_transparent_bounds = True
-            matcher.region(rule_matcher.get_break_position())
-            res: bool = bool(matcher.looking_at())
-            return not res
         else:
             return True
 
