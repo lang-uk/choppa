@@ -1,0 +1,159 @@
+{
+ "language": "pl",
+ "source": "PolishSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "To się wydarzyło 3.10.2000 i mam na to dowody."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To było 13.12 - nikt nie zapomni tego przemówienia."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Heute ist der 13.12.2004."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest np. ten debil spod jedynki."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest 1. wydanie."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dziś jest 13. rocznica powstania wąchockiego."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das in Punkt 3.9.1 genannte Verhalten."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest tzw. premier."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Jarek kupił sobie kurteczkę, tj. strój Marka."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Prezydent jest niemądry”. ",
+    "Tak wyszło."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Prezydent jest niemądry”, powiedział premier"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Temperatura wody w systemie wynosi 30°C.",
+    "W skład obiegu otwartego wchodzi zbiornik i armatura."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Zabudowano kolumny o długości 45 m. ",
+    "Woda z ujęcia jest dostarczana do zakładu."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Najlepszym polskim reżyserem był St. Różewicz. ",
+    "Chodzi o brata wielkiego poety."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ks. Jankowski jest prof. teologii."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To wydarzyło się w 1939 r.",
+    "To był burzliwy rok."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Prezydent jest popierany przez 20 proc. społeczeństwa."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Moje wystąpienie ma na celu zmobilizowanie zarządu partii do działań, które umożliwią uzyskanie 40 proc.",
+    "Nie widzę dziś na scenie politycznej formacji, która lepiej by łączyła różne poglądy"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest zmienna A.",
+    "Zaś to jest zmienna B."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mam już 20 mln.",
+    "To powinno mi wystarczyć"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mam już 20 mln. buraków."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Rytmem tej wiecznie przemijającej światowej egzystencji […] rytmem mesjańskiej natury jest szczęście."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "W gazecie napisali, że pasy (sic!) pogryzły człowieka."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Mam w magazynie dwie skrzynie LMD20. ",
+    "Jestem żołnierzem i wiem, jak można ich użyć"
+   ]
+  }
+ ]
+}

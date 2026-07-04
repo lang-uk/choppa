@@ -1,0 +1,41 @@
+{
+ "language": "ast",
+ "source": "AsturianSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "De secute, los hackers de Minix aportaron idegues y códigu al núcleu Linux, y güey recibiera contribuciones de miles de programadores. ",
+    "Torvalds sigue lliberando nueves versiones del núcleu, consolidando aportes d'otros programadores y faciendo cambios el mesmu."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De secute,\nlos hackers de Minix..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De secute,\n\n",
+    "los hackers de Minix..."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "De secute,\n",
+    "los hackers de Minix..."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "De secute,\n",
+    "\n",
+    "los hackers de Minix..."
+   ]
+  }
+ ]
+}

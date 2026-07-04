@@ -1,0 +1,19 @@
+{
+ "language": "crh",
+ "source": "CrimeanTatarSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_one",
+   "sentences": [
+    "Yapraqlar töküldi. "
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Yapraqlar töküldi. ",
+    "Otlar-ölenler sarardı, soldılar."
+   ]
+  }
+ ]
+}

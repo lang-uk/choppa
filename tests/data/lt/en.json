@@ -1,0 +1,480 @@
+{
+ "language": "en",
+ "source": "EnglishSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_one",
+   "sentences": [
+    "What is the I.S?"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Where are the I.S and the M.Z notes? "
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Here's a"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Here's a sentence. ",
+    "And here's one that's not comp"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Or did you install it (i.e. MS Word) yourself?"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence. "
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence. ",
+    "And this is another one."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is it. ",
+    "and this is another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence. ",
+    "and this is another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence.",
+    "Isn't it?",
+    "Yes, it is."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is e.g. Mr. Smith, who talks slowly...",
+    "But this is another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Chanel no. 5 is blah."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Mrs. Jones gave Peter $4.5, to buy Chanel No 5.",
+    "He never came back."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "On p. 6 there's nothing. ",
+    "Another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Leave me alone!, he yelled. ",
+    "Another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Leave me alone!\", he yelled."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "'Leave me alone!', he yelled. ",
+    "Another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "'Leave me alone!,' he yelled. ",
+    "Another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This works on the phrase level, i.e. not on the word level."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Let's meet at 5 p.m. in the main street."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "James comes from the U.K. where he worked as a programmer."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Don't split strings like U.S.A. please."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Hello ( Hi! ) my name is Chris."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Don't split strings like U. S. A. either."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Don't split strings like U.S.A either."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Don't split... ",
+    "Well you know. ",
+    "Here comes more text."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Don't split... well you know. ",
+    "Here comes more text."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The \".\" should not be a delimiter in quotes."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Here he comes!\" she said."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Here he comes!\", she said."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Here he comes.\" ",
+    "But this is another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Here he comes!\". ",
+    "That's what he said."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The sentence ends here. ",
+    "(Another sentence.)"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The sentence (...) ends here."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The sentence [...] ends here."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The sentence ends here (...). ",
+    "Another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't. ",
+    "Really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He will not. ",
+    "Really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't go. ",
+    "Really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't say no.",
+    "Not really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't say No.",
+    "Not really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't say no. 5 is better. ",
+    "Not really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He won't say No. 5 is better. ",
+    "Not really."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "They met at 5 p.m. on Thursday."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "They met at 5 p.m. ",
+    "It was Thursday."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is it: a test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "12) Make sure that the lamp is on. ",
+    "12) Make sure that the lamp is on. "
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "He also offers a conversion table (see Cohen, 1988, p. 123). "
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "James is from the Ireland!",
+    "He lives in Spain now."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Jones Bros. have built a successful company."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It (really!) works."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It [really!] works."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It works (really!). ",
+    "No doubt."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It works [really!]. ",
+    "No doubt."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It really(!) works well."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "It really[!] works well."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "A test. \n",
+    "Another test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "A test. ",
+    "Another test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "A test.\n",
+    "Another test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "A test. \n",
+    "Another test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "A test. \n",
+    "\n",
+    "Another test."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "\"Here he comes.\" ",
+    "But this is another sentence."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "The new Yahoo! product is nice."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Yahoo!, what is it?"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Yahoo!",
+    "What is it?"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence.\u0002 ",
+    "And this is another one."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Other good editions are in vol. 4."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Other good editions are in vol. IX."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Other good editions are in vol. I think."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Who Shall I Say is Calling & Other Stories S. Deziemianowicz, ed. (2009)"
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "Who Shall I Say is Calling & Other Stories S. Deziemianowicz, ed. ",
+    "And this is another one."
+   ]
+  },
+  {
+   "mode": "_one",
+   "sentences": [
+    "This is a sentence written by Ed. ",
+    "And this is another one."
+   ]
+  }
+ ]
+}

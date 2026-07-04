@@ -1,0 +1,190 @@
+{
+ "language": "da",
+ "source": "DanishSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en sætning. ",
+    "Her er den næste."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En sætning! ",
+    "Yderlige en."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En sætning... ",
+    "Yderlige en."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "På hjemmesiden http://www.stavekontrolden.dk bygger vi stavekontrollen."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Den 31.12. går ikke!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Den 3.12.2011 går ikke!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "I det 18. og tidlige 19. århundrede hentede amerikansk kunst det meste af sin inspiration fra Europa."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hendes Majestæt Dronning Margrethe II (Margrethe Alexandrine Þórhildur Ingrid, Danmarks dronning) (født 16. april 1940 på Amalienborg Slot) er siden 14. januar 1972 Danmarks regent."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hun har residensbolig i Christian IX's Palæ på Amalienborg Slot."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Tronfølgeren ledte herefter statsrådsmøderne under Kong Frederik 9.'s fravær."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Marie Hvidt, Frederik IV - En letsindig alvorsmand, Gads Forlag, 2004."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Da vi første gang besøgte Restaurant Chr. IV, var vi de eneste gæster."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "I dag er det den 25.12.2010."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "I dag er det d. 25.12.2010."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "I dag er den 13. december."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Arrangementet starter ca. 17:30 i dag."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Arrangementet starter ca. 17:30."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Det er nævnt i punkt 3.6.4 Rygbelastende helkropsvibrationer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Rent praktisk er det også lettest lige at mødes, så der kan udveksles nøgler og brugsanvisninger etc."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Andre partier incl. borgerlige partier har deres særlige problemer: nogle samarbejder med apartheidstyret i Sydafrika, med NATO-landet Tyrkiet etc., men det skal så sandelig ikke begrunde en SF-offensiv for et samarbejde med et parti."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hvad nu,, den bliver også."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Det her er det.. ",
+    "Og her fortsætter det."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en(!) sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en(!!) sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en(?) sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en(??) sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dette er en(???) sætning."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Militær værnepligt blev indført (traktaten krævede, at den tyske hær ikke oversteg 100.000 mand)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Siden illustrerede hun \"Historierne om Regnar Lodbrog\" 1979 og \"Bjarkemål\" 1982 samt Poul Ørums \"Komedie i Florens\" 1990."
+   ]
+  }
+ ]
+}

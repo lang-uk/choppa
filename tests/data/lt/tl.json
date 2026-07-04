@@ -1,0 +1,13 @@
+{
+ "language": "tl",
+ "source": "TagalogSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ang Linux ay isang operating system kernel para sa mga operating system na humahalintulad sa Unix. ",
+    "Isa ang Linux sa mga pinaka-prominanteng halimbawa ng malayang software at pagsasagawa ng open source; madalas, malayang mapapalitan, gamitin, at maipamahagi ninuman ang lahat ng pinag-ugatang source code (pinagmulang kodigo)."
+   ]
+  }
+ ]
+}

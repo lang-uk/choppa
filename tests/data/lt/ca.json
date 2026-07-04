@@ -1,0 +1,643 @@
+{
+ "language": "ca",
+ "source": "CatalanSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Això és una frase. ",
+    "Això és una altra frase."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aquesta és l'egua. ",
+    "Aquell és el cavall."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aquesta és l'egua? ",
+    "Aquell és el cavall."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vols col·laborar? ",
+    "Sí, i tant."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Com vas d'il·lusió? ",
+    "Bé, bé."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Com vas d’il·lusió? ",
+    "Bé, bé."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "És d’abans-d’ahir? ",
+    "Bé, bé."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "És d’abans-d’ahir! ",
+    "Bé, bé."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Què vols dir? ",
+    "Ja ho tinc!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Què? ",
+    "Ja ho tinc!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ah! ",
+    "Ja ho tinc!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ja ho tinc! ",
+    "Què vols dir?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Us explicaré com va anar: ",
+    "»La Maria va engegar el cotxe"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "diu que va dir. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Són del s. III dC. ",
+    "Són importants les pintures."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Primera frase.[4] ",
+    "Segona frase"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "23. Article vint-i-tres"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vés-te’n. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vés-te'n. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "VÉS-TE'N. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Canten. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Desprèn. ",
+    "A mi em feia estrany."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(n. 3)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    " n. 3"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "n. 3"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(\"n. 3\"."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "En el t. 2 de la col·lecció"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Llança't. ",
+    "Fes-ho."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "És professor a l'Inst. Joan Vives."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A l'atenció d'A. Comes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A l'atenció d'À. Comes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Són els alumnes de Física I. ",
+    "Ara no venen ben preparats."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Va ser obra de Felip V. ",
+    "Ara ho sabem."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Va ser obra d'Alfons X. ",
+    "Ara ho sabem."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Núm. operació 220130000138."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "el vi no és gens propi de monjos, amb tot...\" vetllant, això sí"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Desenganyeu-vos… ",
+    "L’únic problema seriós de l'home en aquest món és el de subsistir."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "és clar… traduir és una feina endimoniada"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«El cordó del frare…» surt d'una manera desguitarrada"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "convidar el seu heroi –del ram que sigui–… a prendre cafè."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "No Mr. Spock sinó un altre."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vegeu el cap. 24 del llibre."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vegeu el cap. IX del llibre."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Viu al núm. 24 del carrer de l'Hort."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Viu al núm. vint-i-quatre del carrer de l'Hort."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El Dr. Joan no vindrà."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Distingit Sr. Joan,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Molt Hble. Sr. President"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "de Sant Nicolau (del s. XII; cor gòtic del s. XIV) i de Sant "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Va ser el 5è. classificat."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Va ser el 5è. ",
+    "I l'altre el 4t."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Art. 2.1: Són obligats els..."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Arriba fins a les pp. 50-52."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Arriba fins a les pp. XI-XII."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "i no ho vol. ",
+    "Malgrat que és així."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "i és del vol. 3 de la col·lecció"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Els EE. UU. són un país."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Els EE.UU. són un país."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Els ee. uu. són un país."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Els ee.uu. són un país."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Me'n vaig als EE.UU. ",
+    "Bon viatge."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Garcia, Joan (coords.)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "fins al curs de 8è. ",
+    "\"No es pot oblidar allò\""
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "fins al curs de 8è. ",
+    "-No es pot oblidar allò"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aprovació (ca. 2010), suspensió (c. 2011), segle (ca. XIX)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La Dra. Ma. Victòria."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "la projectada Sta. Ma. de Gàllecs"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El fruit té de 6 a 8 cm de long. i 4 a 6 cm d'ample."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Geiger (Proc. Roy. Soc. 1 de febrer de 1910)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El poble tenia 50 hab. a finals de segle XX."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vam veure un documental sobre Warner Bros. Cartoons."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Vam veure un documental sobre la Warner Bros. ",
+    "Era boníssim."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La Warner Bros. feia coses que m'agradaven molt."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Introduïu açí el vostre text. ",
+    "o feu servir aquest texts com a a exemple per a alguns errades que LanguageTool hi pot detectat."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(Impren. Disss)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(Impren. 188-disss)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "[Impren. Disss]"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "[Impren. 188-disss]"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "{Impren. Disss}"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "{Impren. 188-disss}"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(Impren. Disss. Ioo)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(Impren. Disss. Ioo. A. B. Garcia)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Impren. ",
+    "\nDisss"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "(Impren. ",
+    "\nDisss)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ell és el número u. ",
+    "Jo el dos."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Té un trau al cap. ",
+    "Cal portar-lo a l'hospital."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Això passa en el PP. ",
+    "Però, per altra banda,"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ceba, all, carabassa, etc. ",
+    "En comprem a la fruiteria."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "1 500 m/s. ",
+    "Neix a"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Són d'1 g. ",
+    "Han estat condicionades."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Són d'1 m. ",
+    "Han estat condicionades."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hi vivien 50 h. ",
+    "Després el poble va créixer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "L'acte serà a les 15.30 h. de la vesprada."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "De 9:00 a 17:00 h. (aproximadament)."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aquesta és la resolució No. 2 de les Corts."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "s'hi enfrontà quan G.Oueddei n'esdevingué líder"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "el jesuïta alemany J.E. Nithard"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "PERNIL DOLÇ\nBACON\nPEPERONI\nPEBROT VERD\nOLIVES"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El framework .NET o ASP.NET o Microsoft.Net"
+   ]
+  }
+ ]
+}

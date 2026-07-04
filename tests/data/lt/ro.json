@@ -1,0 +1,493 @@
+{
+ "language": "ro",
+ "source": "RomanianSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aceasta este o propozitie fara diacritice. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aceasta este o fraza fara diacritice. ",
+    "Propozitia a doua, tot fara diacritice. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aceasta este o propoziție cu diacritice. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aceasta este o propoziție cu diacritice. ",
+    "Propoziția a doua, cu diacritice. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O propoziție! ",
+    "Și încă o propoziție. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O propoziție... ",
+    "Și încă o propoziție. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La adresa http://www.archeus.ro găsiți resurse lingvistice. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Data de 10.02.2009 nu trebuie să fie separator de propoziții. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Astăzi suntem în data de 07.05.2007. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Astăzi suntem în data de 07/05/2007. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La anumărul (1) avem puține informații. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "To jest 1. wydanie."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La anumărul 1. avem puține informații. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La anumărul 13. avem puține informații. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "La anumărul 1.3.3 avem puține informații. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O singură propoziție... "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Colegii mei s-au dus... "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O singură propoziție!!! "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O singură propoziție??? "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Propoziții: una și alta. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Domnu' a plecat. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Profu' de istorie tre' să predea lecția. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Sal'tare! "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "'Neaţa! "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Deodat'apare un urs. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A făcut două cópii. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ionel adúnă acum ceea ce Maria aduná înainte să vin eu. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Domnu' a plecat"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Domnu' a plecat. ",
+    "El nu a plecat"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Se pot întâlni și abrevieri precum S.U.A. sau B.C.R. într-o singură propoziție."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Se pot întâlni și abrevieri precum S.U.A. sau B.C.R. ",
+    "Aici sunt două propoziții."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Același lucru aici... ",
+    "Aici sunt două propoziții."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Același lucru aici... dar cu o singură propoziție."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„O propoziție!” ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„O propoziție!!!” ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„O propoziție?” ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„O propoziție?!?” ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«O propoziție!» ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«O propoziție!!!» ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«O propoziție?» ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«O propoziție???» ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "«O propoziție?!?» ",
+    "O alta."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "O primă propoziție. ",
+    "(O alta.)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A venit domnu' Vasile. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A venit domnu' acela. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "El este din România!",
+    "Acum e plecat cu afaceri."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Temperatura este de 30°C.",
+    "Este destul de cald."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A alergat 50 m. ",
+    "Deja a obosit."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Pentru dvs. vom face o excepție."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Pt. dumneavoastră vom face o excepție."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Pt. dvs. vom face o excepție."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A expus problema d.p.d.v. artistic."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A expus problema dpdv. artistic."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, șamd. dar nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, ș.a.m.d. dar nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, ș.a.m.d. ",
+    "În schimb, nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, ş.c.l. dar nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, ş.c.l. ",
+    "Nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, etc. dar nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, etc. ",
+    "Nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Are mere, pere, ș.a. dar nu are alune."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Lecția începe la pag. următoare și are trei pagini."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Lecția începe la pag. 20 și are trei pagini."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A acționat în conformitate cu lg. 144, art. 33."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A acționat în conformitate cu leg. 144, art. 33."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A acționat în conformitate cu legea nr. 11."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Lupta a avut loc în anul 2000 î.H. și a durat trei ani."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Discuția a avut loc pe data de douăzeci aug. și a durat două ore."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Discuția a avut loc pe data de douăzeci ian. și a durat două ore."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Discuția a avut loc pe data de douăzeci feb. și a durat două ore."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Discuția a avut loc pe data de douăzeci ian.",
+    "A durat două ore."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A fost și la M.Ap.N. dar nu l-au primit. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "A fost și la M.Ap.N. ",
+    "Nu l-au primit. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Apo' da' tulai (sic!) că mult mai e de mers."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Apo' da' tulai(sic!) că mult mai e de mers."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aici este o frază […] mult prescurtată."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Aici este o frază [...] mult prescurtată."
+   ]
+  }
+ ]
+}

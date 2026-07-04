@@ -1,0 +1,412 @@
+{
+ "language": "de",
+ "source": "GermanSRXSentenceTokenizerTest.java",
+ "cases": [
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz. ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz.¹ ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ein Satz! ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ein Satz... ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Unter http://www.test.de gibt es eine Website."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 3.10. datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 31.1. datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das Schreiben ist auf den 3.10.2000 datiert."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Natürliche Vererbungsprozesse prägten sich erst im 18. und frühen 19. Jahrhundert aus."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das ist ja 1a. ",
+    "Und das auch."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hallo, ich bin’s. ",
+    "Könntest du kommen?"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "In der 1. Bundesliga kam es zum Eklat."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist, z. B., ein Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Da hatte es über 30 °C. ",
+    "Hier kommt der nächste Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das 1. Internationale Filmfestival findet nächste Woche statt."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich I., auch bekannt als Friedrich der Große."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich II., auch bekannt als Friedrich der Große."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich IIXC., auch bekannt als Friedrich der Große."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich II. öfter auch bekannt als Friedrich der Große."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich VII. öfter auch bekannt als Friedrich der Große."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Friedrich X. öfter auch bekannt als Friedrich der Zehnte."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Ein Satz! ",
+    "Noch einer."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist, z. B., ein Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Hier steht was mit mehr Wörtern, weil wir mal sehen wollen, wie denn so die Erkennung der Satzlänge geht, wenn die Sätze doch deutlich länger werden, also wirklich deutlich länger als das normal. ",
+    "Hier steht etwas anderes."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Heute ist der 13.12.2004."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Heute ist der 13. Dezember."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Heute ist der 1. Januar."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Es geht am 24.09. los."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Es geht um ca. 17:00 los."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das in Punkt 3.9.1 genannte Verhalten."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Diese Periode begann im 13. Jahrhundert und damit bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Diese Periode begann im 13. oder 14. Jahrhundert und damit bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Diese Periode datiert auf das 13. bis zum 14. Jahrhundert und damit bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das gilt lt. aktuellem Plan."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Orangen, Äpfel etc. werden gekauft."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das ist,, also ob es bla."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das ist es.. ",
+    "So geht es weiter."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(!) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(!!) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(?) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(???) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das hier ist ein(???) Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Der Papagei ist grün.« ",
+    "Das kam so."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Der Papagei ist grün«, sagte er"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das war es: gar nichts."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Das war es: Dies ist ein neuer Satz."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "schlug er die Richtung nach der K … brücke ein. "
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "sobald ich es von einem Freunde zurückbekomme …« Er wurde verlegen und schwieg."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Er kannte eine Unmenge Quellen, aus denen er schöpfen konnte, d. h. natürlich, wo er durch Arbeit sich etwas verdienen konnte."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Stimme am lautesten heraustönte …. ",
+    "Sobald er auf der Straße war"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Welche Wohnung?\" ",
+    "»Die, wo wir arbeiten."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Nun also, wie ist's?« fragte Lushin und blickte sie fest an."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Nun also, wie ist es?« fragte Lushin und blickte sie fest an."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "„Nun also, wie ist es?“ fragte Lushin und blickte sie fest an."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "»Nun also, wie ist es?« ",
+    "Dann ging er."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Dies ist ein Satz mit einer EMail.Addresse@example.com!"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Sonderbarerweise sind auch Beispiel!Eins@example.com und Foo?Bar@example.com valide."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Er kauft Obst, Gemüse, Brot, Milch, usw. ",
+    "Danach geht er nach Hause."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Sie kaufte Bücher, Hefte, Stifte usw., weil sie sich auf das neue Schuljahr vorbereiten wollte."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Im Supermarkt gibt es viele Sorten von Käse, Wurst, Brot usw. und alle sind sehr lecker."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Im Büro gibt es Computer, Drucker, Telefone etc. ",
+    "Die Mitarbeiter arbeiten den ganzen Tag an verschiedenen Projekten."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Die Ergebnisse sind in Tabellen, Grafiken, Diagrammen etc. dargestellt."
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Master of Law (LL.B.)"
+   ]
+  },
+  {
+   "mode": "_two",
+   "sentences": [
+    "Master of Law (LL. B.)"
+   ]
+  }
+ ]
+}
