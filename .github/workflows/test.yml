@@ -22,6 +22,9 @@ jobs:
       - name: Run tests
         run: pytest tests/ -q
       - name: CLI smoke test
+        # No trailing newline on the input: segments preserve input bytes
+        # exactly, so a trailing \n would stay inside the last segment and
+        # print as an extra blank line.
         run: |
-          echo "Перше речення. Друге речення!" | choppa -l uk_two | tee out.txt
-          test "$(wc -l < out.txt)" -eq 2
+          printf 'Перше речення. Друге речення!' | choppa -l uk_two | tee out.txt
+          printf 'Перше речення. \nДруге речення!\n' | diff - out.txt
