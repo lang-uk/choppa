@@ -45,7 +45,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest"]
+test = ["pytest", "hypothesis"]
 
 [project.scripts]
 choppa = "choppa.__main__:main"
