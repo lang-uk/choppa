@@ -362,6 +362,8 @@ class SrxTextIterator(AbstractTextIterator):
                             )
 
                         self.text_manager.read_text(self.start_position)
+                        # Positions are relative to the shifted buffer now.
+                        self.start_position = 0
                         self.init_matchers()
                         min_matcher = self.get_min_matcher()
 

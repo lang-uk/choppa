@@ -109,7 +109,7 @@ class TextManager:
         elif count > 0 and count < amount:
             self.next_character = ""
         else:
-            self.result = ""
+            result = ""
             self.next_character = ""
 
         return result
