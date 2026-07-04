@@ -44,7 +44,7 @@ jobs:
         run: pip install -e .
       - name: Fetch the Java segment reference implementation
         run: |
-          curl -sL -o segment.zip https://github.com/loomchild/segment/releases/download/2.0.3/segment-2.0.3.zip
+          curl -sfL -o segment.zip https://github.com/loomchild/segment/releases/download/2.0.3/segment-2.0.3.zip
           unzip -q segment.zip
       - name: Assert bundled rules match the pinned LanguageTool commit
         run: |

@@ -23,7 +23,7 @@ jobs:
         id: diff
         run: |
           SRX_PATH="languagetool-core/src/main/resources/org/languagetool/resource/segment.srx"
-          curl -sL -o upstream.srx "https://raw.githubusercontent.com/languagetool-org/languagetool/master/$SRX_PATH"
+          curl -sfL -o upstream.srx "https://raw.githubusercontent.com/languagetool-org/languagetool/master/$SRX_PATH"
           if cmp -s upstream.srx choppa/data/srx/languagetool_segment.srx; then
             echo "drifted=false" >> "$GITHUB_OUTPUT"
           else

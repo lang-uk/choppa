@@ -35,8 +35,9 @@ class SegmentationPropertiesTest(unittest.TestCase):
 
     @settings(deadline=None, max_examples=50)
     @given(text=TEXTS, language=LANGUAGES)
-    def test_streaming_equals_string_mode(self, text: str, language: str) -> None:
-        # Buffer is guaranteed to fit the longest possible segment.
+    def test_reader_mode_equals_string_mode(self, text: str, language: str) -> None:
+        # Buffer fits the whole text: verifies the reader constructor
+        # itself; the buffer-shift path is exercised by the test below.
         string_segments = list(SrxTextIterator(get_document(), language, text))
         reader_segments = list(
             SrxTextIterator(
@@ -44,6 +45,26 @@ class SegmentationPropertiesTest(unittest.TestCase):
                 language,
                 io.StringIO(text),
                 buffer_length=max(32, len(text) + 16),
+            )
+        )
+        self.assertEqual(string_segments, reader_segments)
+
+    @settings(deadline=None, max_examples=50)
+    @given(text=TEXTS, language=LANGUAGES)
+    def test_streaming_buffer_shifts_equal_string_mode(self, text: str, language: str) -> None:
+        # Join copies with paragraph breaks so segments stay bounded by
+        # ~len(text) while the total exceeds the buffer several times
+        # over - forcing the buffer-shift/margin path (with the default
+        # margin of 128, buffer - margin still exceeds any segment).
+        stream_text = "\n\n".join([text] * 6)
+        buffer_length = max(256, len(text) + 160)
+        string_segments = list(SrxTextIterator(get_document(), language, stream_text))
+        reader_segments = list(
+            SrxTextIterator(
+                get_document(),
+                language,
+                io.StringIO(stream_text),
+                buffer_length=buffer_length,
             )
         )
         self.assertEqual(string_segments, reader_segments)
