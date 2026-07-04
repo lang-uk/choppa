@@ -59,7 +59,10 @@ Ready to contribute? Here's how to set up `choppa` for local development.
     ```bash
     $ git clone git@github.com:your_name_here/choppa.git
     ```
-3.  Install your local copy into a virtualenv.
+3.  Install your local copy into a virtualenv:
+    ```bash
+    $ pip install -e .[test]
+    ```
 
 4.  Create a branch for local development:
     ```bash
@@ -94,10 +97,13 @@ Pull Request Guidelines
 Before you submit a pull request, check that it meets these guidelines:
 
 1.  The pull request should include tests.
-2.  If the pull request adds functionality, the docs should be updated.
-    Put your new functionality into a function with a docstring, and add
-    the feature to the list in README.md.
-3.  The pull request should work for Python 3.7 and onward
+2.  If the pull request adds functionality, the docs should be updated:
+    docstrings, README.md, and — for API or behavior changes —
+    [docs/api.md](docs/api.md) and [docs/design.md](docs/design.md).
+    Changes to segmentation behavior must keep the byte-compatibility
+    contract with Java segment (see docs/design.md) and pass
+    `scripts/benchmark.py --java` on a real corpus.
+3.  The pull request should work for Python 3.9 and onward
 
 Tips
 ----

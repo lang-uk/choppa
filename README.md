@@ -138,6 +138,18 @@ python scripts/benchmark.py corpus.txt --language uk_two --java java.txt
 exact upstream commit and refresh instructions. You can also pass any SRX
 2.0 file of your own via `SrxDocument(ruleset=...)` or `choppa --srx`.
 
+# Documentation
+
+- [API contract](docs/api.md) — public API, parameters, streaming
+  semantics, error behavior, stability guarantees
+- [Design decisions](docs/design.md) — how Java `Matcher` semantics map
+  onto Python, the rule translator, `^`/MULTILINE, finitization, the two
+  algorithms, and the testing philosophy
+- [Project heritage](docs/history.md) — SRX, segment, LanguageTool, and
+  the 2022–2026 story of this port
+- [Performance and verification](#performance-and-verification) — the
+  benchmark table above, with reproduction steps
+
 # Development
 
 ```bash
