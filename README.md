@@ -10,10 +10,11 @@ can chop anything textual). It is the same segmentation engine and the same
 rules LanguageTool uses — in pure Python.
 
 - **Identical output.** `SrxTextIterator` is byte-identical to the Java
-  original: verified on a 100k-line / 11 MB real-world Ukrainian corpus
-  (43,569 segments, zero differences) and on 848 test cases ported from
-  LanguageTool's 24 language test suites.
-- **Fast.** The same corpus segments in ~5 s vs ~30 s for the Java CLI
+  original: verified on ~136,000 segments across seven real-world corpora
+  (Ukrainian news from three sources, three English novels — zero
+  differences) and on 848 test cases ported from LanguageTool's 24
+  language test suites. See [Performance and verification](#performance-and-verification).
+- **Fast.** An 11 MB corpus segments in ~5 s vs ~30 s for the Java CLI
   (Apple M1); about 25x faster than choppa 0.9.
 - **Streaming.** Text can be read incrementally from a file object with a
   fixed-size buffer, so multi-GB corpora do not need to fit in memory.
@@ -96,6 +97,38 @@ Only the SRX 2.0 format and the SAX reader are implemented (the same
 parser configuration LanguageTool uses). Schema validation via
 `xmlschema` is available with `SrxDocument(validate_ruleset=...)` or
 `choppa --validate`.
+
+# Performance and verification
+
+Segmentation output was compared byte-for-byte against the Java original
+(`segment-2.0.3`, `ultimate` algorithm, the bundled LanguageTool
+`segment.srx`, identical results under JDK 17 and JDK 24) on real-world
+corpora. `choppa` = `SrxTextIterator`, Apple M1, Python 3.12,
+regex 2026.6.28. Java times include ~1 s of JVM startup and rule parsing,
+so the engine gap on large inputs is what matters:
+
+| corpus | language | size | segments | Java | choppa | output |
+|---|---|---|---|---|---|---|
+| Militarny news, 100k paragraphs | `uk_two` | 11.3 MB | 43,569 | 29.6 s | 4.6 s | identical |
+| uanews.dp.ua, 5k articles | `uk_two` | 12.5 MB | 64,063 | 21.3 s | 9.0 s | identical |
+| Liga.net news, 197 articles | `uk_two` | 0.4 MB | 2,647 | 1.1 s | 0.2 s | identical |
+| *Pride and Prejudice* (Gutenberg) | `en_two` | 0.8 MB | 6,720 | 1.0 s | 0.7 s | identical |
+| *Moby-Dick* (Gutenberg) | `en_two` | 1.3 MB | 10,188 | 1.1 s | 1.0 s | identical |
+| *Sherlock Holmes* (Gutenberg) | `en_two` | 0.6 MB | 6,875 | 0.8 s | 1.2 s | identical |
+
+In total: ~136,000 segments, zero differences.
+
+To reproduce with your own corpus (LF line endings — Java does not
+normalize CRLF, so make both sides read the same bytes):
+
+```bash
+# Java ground truth (CLI zip from github.com/loomchild/segment/releases)
+segment-2.0.3/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \
+    -l uk_two -r -i corpus.txt -o java.txt -e $'\x01'
+
+# choppa: benchmark + byte-level diff
+python scripts/benchmark.py corpus.txt --language uk_two --java java.txt
+```
 
 # Segmentation rules
 

@@ -10,8 +10,9 @@ project).
 ### Fixed
 
 - **`SrxTextIterator` output is now byte-identical to the original Java
-  `segment` library** (verified against segment 2.0.3 on a 100k-line
-  real-world Ukrainian corpus, 43,569 segments). The former `JavaMatcher`
+  `segment` library** (verified against segment 2.0.3 on ~136,000
+  segments across seven real-world Ukrainian and English corpora; see
+  the README's "Performance and verification" section). The former `JavaMatcher`
   emulation layer searched only a 100-character window from the region
   start, silently missing any break located further away — long
   sentences were never split.

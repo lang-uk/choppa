@@ -14,11 +14,10 @@ the segment CLI: https://github.com/loomchild/segment/releases):
         -l uk_two -r -i corpus.txt -o java.txt -e $'\\x01'
     python scripts/benchmark.py corpus.txt --language uk_two --java java.txt
 
-The historical reference numbers (100k lines / 11 MB of Ukrainian news
-text, current LanguageTool segment.srx, M1 MacBook):
-
-    Java segment 2.0.3 (ultimate) : 43,569 segments, 29.6s
-    choppa 1.0 (SrxTextIterator)  : 43,569 segments,  5.4s, byte-identical
+Reference numbers for six corpora (uk news x3, English novels x3,
+~136,000 segments, all byte-identical to Java) are in the README's
+"Performance and verification" section. Corpus files must use LF line
+endings: Java does not normalize CRLF, Python's read_text does.
 """
 
 import argparse
