@@ -1,5 +1,39 @@
 import regex as re  # type: ignore
 
+# Java-only regex constructs that have to be translated before a rule
+# pattern can be compiled by the regex package. The \\. alternative
+# consumes any other escape pair first, so \h/\v are only rewritten when
+# the backslash is not itself escaped.
+#
+# \h and \v are Java's horizontal/vertical whitespace classes; in Python
+# patterns \v is the literal LINE TABULATION escape, so both are mapped to
+# the equivalent \p{H}/\p{V} properties added to the regex package in
+# 2022.8.17 (https://github.com/mrabarnett/mrab-regex/issues/477).
+# \p{H}/\p{V} match Java's classes exactly, while the regex package's own
+# \h misses U+180E.
+#
+# (?U) is Java's UNICODE_CHARACTER_CLASS inline flag (used by LanguageTool
+# rules to fix the JDK >= 19 \b regression); Python character classes are
+# Unicode-aware by default for str patterns, so the flag is dropped.
+JAVA_CONSTRUCT_PATTERN: re.Regex = re.compile(r"\\h|\\v|\\.|\(\?U\)")
+JAVA_CONSTRUCT_REPLACEMENTS = {
+    r"\h": r"\p{H}",
+    r"\v": r"\p{V}",
+    "(?U)": "",
+}
+
+
+def translate_java_regex(pattern: str) -> str:
+    """
+    Translates Java-only regex constructs (\\h, \\v, (?U)) into their
+    Python regex-package equivalents. See JAVA_CONSTRUCT_PATTERN above.
+    """
+    return JAVA_CONSTRUCT_PATTERN.sub(
+        lambda match: JAVA_CONSTRUCT_REPLACEMENTS.get(match.group(), match.group()),
+        pattern,
+    )
+
+
 STAR_PATTERN: re.Regex = re.compile("(?<=(?<!\\\\)(?:\\\\\\\\){0,100})\\*")
 PLUS_PATTERN: re.Regex = re.compile("(?<=(?<!\\\\)(?:\\\\\\\\){0,100})(?<![\\?\\*\\+]|\\{[0-9],?[0-9]?\\}?\\})\\+")
 RANGE_PATTERN: re.Regex = re.compile("(?<=(?<!\\\\)(?:\\\\\\\\){0,100})\\{\\s*([0-9]+)\\s*,\\s*\\}")

@@ -9,25 +9,20 @@ rules, and the result must equal the expected list. The language key is
 setSingleLineBreaksMarksParagraph setting in the original Java test.
 """
 
+import functools
 import json
 import unittest
 from pathlib import Path
 from typing import List
 
-from choppa.srx_parser import SrxDocument
-from choppa.iterators import SrxTextIterator
+from choppa import DEFAULT_SRX_RULESET, SrxDocument, SrxTextIterator
 
 DATA_DIR = Path(__file__).parent / "data" / "lt"
-RULESET = Path(__file__).parent.parent / "choppa" / "data" / "srx" / "languagetool_segment.srx"
-
-_document = None
 
 
+@functools.lru_cache(maxsize=1)
 def get_document() -> SrxDocument:
-    global _document
-    if _document is None:
-        _document = SrxDocument(ruleset=RULESET)
-    return _document
+    return SrxDocument(ruleset=DEFAULT_SRX_RULESET)
 
 
 class LanguageToolTokenizerTest(unittest.TestCase):
@@ -52,8 +47,6 @@ def _make_test(path: Path):
     def test(self: LanguageToolTokenizerTest) -> None:
         self.run_language(path)
 
-    test.__name__ = f"test_{path.stem}"
-    test.__doc__ = f"LanguageTool tokenizer suite for '{path.stem}'"
     return test
 
 

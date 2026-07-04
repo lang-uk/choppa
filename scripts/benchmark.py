@@ -28,22 +28,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from choppa.srx_parser import SrxDocument
-from choppa.iterators import SrxTextIterator, AccurateSrxTextIterator
-
-DEFAULT_SRX = Path(__file__).parent.parent / "choppa" / "data" / "srx" / "languagetool_segment.srx"
-
-ITERATORS = {
-    "SrxTextIterator": SrxTextIterator,
-    "AccurateSrxTextIterator": AccurateSrxTextIterator,
-}
+from choppa import DEFAULT_SRX_RULESET, SrxDocument
+from choppa.iterators import ITERATORS
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
+    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
     parser.add_argument("corpus", type=Path)
     parser.add_argument("--language", default="uk_two")
-    parser.add_argument("--srx", type=Path, default=DEFAULT_SRX)
+    parser.add_argument("--srx", type=Path, default=DEFAULT_SRX_RULESET)
     parser.add_argument("--iterator", choices=sorted(ITERATORS), default="SrxTextIterator")
     parser.add_argument("--out", type=Path, help="write segments separated by \\x01")
     parser.add_argument("--java", type=Path, help="Java segment output (\\x01-separated) to diff against")

@@ -27,7 +27,6 @@ class RuleMatcher:
     """
 
     __slots__ = (
-        "document",
         "rule",
         "text",
         "text_len",
@@ -47,7 +46,6 @@ class RuleMatcher:
         text text
         """
 
-        self.document: SrxDocument = document
         self.rule: Rule = rule
         self.text: str = text
         self.text_len: int = len(text)

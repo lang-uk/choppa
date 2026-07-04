@@ -8,42 +8,7 @@ import xmlschema  # type: ignore
 
 from .structures import Rule, LanguageRule, LanguageMap
 from .rule_manager import RuleManager
-
-
-# Java-only regex constructs that have to be translated before the pattern
-# can be compiled by the regex package. The lookbehind guard (same idiom as
-# in utils.py) makes sure we only touch constructs preceded by an even
-# number of backslashes, i.e. we never rewrite an escaped literal backslash
-# followed by "h"/"v".
-#
-# \h and \v are Java's horizontal/vertical whitespace classes; in Python
-# patterns \v is the literal LINE TABULATION escape, so both are mapped to
-# the equivalent \p{H}/\p{V} properties added to the regex package in
-# 2022.8.17 (https://github.com/mrabarnett/mrab-regex/issues/477).
-# \p{H}/\p{V} match Java's classes exactly, while the regex package's own
-# \h misses U+180E.
-#
-# (?U) is Java's UNICODE_CHARACTER_CLASS inline flag (used by LanguageTool
-# rules to fix the JDK >= 19 \b regression); Python character classes are
-# Unicode-aware by default for str patterns, so the flag is dropped.
-JAVA_CONSTRUCT_PATTERN: re.Regex = re.compile(
-    r"(?<=(?<!\\)(?:\\\\){0,100})(?:\\h|\\v)|\(\?U\)"
-)
-JAVA_CONSTRUCT_REPLACEMENTS: Dict[str, str] = {
-    r"\h": r"\p{H}",
-    r"\v": r"\p{V}",
-    "(?U)": "",
-}
-
-
-def translate_java_regex(pattern: str) -> str:
-    """
-    Translates Java-only regex constructs (\\h, \\v, (?U)) into their
-    Python regex-package equivalents. See JAVA_CONSTRUCT_PATTERN above.
-    """
-    return JAVA_CONSTRUCT_PATTERN.sub(
-        lambda match: JAVA_CONSTRUCT_REPLACEMENTS[match.group()], pattern
-    )
+from .utils import translate_java_regex
 
 
 class SrxDocument:
@@ -76,6 +41,8 @@ class SrxDocument:
         self.language_map_list: List[LanguageMap] = []
         self.regex_cache: Dict[str, re.Regex] = {}
         self.rule_manager_cache: Dict[str, RuleManager] = {}
+        # Keyed by (language_code, cascade); cleared when a map is added.
+        self.language_rule_cache: Dict[tuple, List[LanguageRule]] = {}
 
         if ruleset is not None:
             if validate_ruleset is not None:
@@ -90,12 +57,13 @@ class SrxDocument:
         Add language map to this document.
         """
         self.language_map_list.append(LanguageMap(pattern, language_rule))
+        self.language_rule_cache.clear()
 
     def compile(self, regex: str) -> re.Regex:
         """
         Compiles given pattern as regex.Regex (V1), caches it
         """
-        key: str = "PATTERN_" + regex
+        key: str = f"PATTERN_{self.pattern_flags}_{regex}"
 
         pattern: Optional[re.Regex] = self.regex_cache.get(key, None)
 
@@ -130,12 +98,19 @@ class SrxDocument:
 
         """
 
+        cache_key = (language_code, self.cascade)
+        cached = self.language_rule_cache.get(cache_key)
+        if cached is not None:
+            return cached
+
         matching_language_rule_list: List[LanguageRule] = []
         for language_map in self.language_map_list:
             if language_map.matches(language_code):
                 matching_language_rule_list.append(language_map.language_rule)
                 if not self.cascade:
                     break
+
+        self.language_rule_cache[cache_key] = matching_language_rule_list
         return matching_language_rule_list
 
 

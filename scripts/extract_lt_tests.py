@@ -81,6 +81,30 @@ JAVA_SIMPLE_ESCAPES = {
     "\\": "\\",
 }
 
+MODE_CALL_PATTERN = re.compile(
+    r"(\w+)\.setSingleLineBreaksMarksParagraph\((true|false)\)"
+)
+
+
+def apply_mode_calls(fragment: str, modes: Dict[str, str]) -> None:
+    """Applies every setSingleLineBreaksMarksParagraph call in `fragment`
+    to the field->mode mapping (true -> '_one', false -> '_two')."""
+    for match in MODE_CALL_PATTERN.finditer(fragment):
+        modes[match.group(1)] = "_one" if match.group(2) == "true" else "_two"
+
+
+def skip_string_literal(source: str, start: int) -> int:
+    """Given `start` pointing at an opening quote (single or double),
+    returns the index just past the closing quote."""
+    quote = source[start]
+    i = start + 1
+    n = len(source)
+    while i < n and source[i] != quote:
+        if source[i] == "\\":
+            i += 1
+        i += 1
+    return i + 1
+
 
 def strip_comments(source: str) -> str:
     """Removes // and /* */ comments, preserving string literals."""
@@ -89,22 +113,10 @@ def strip_comments(source: str) -> str:
     n = len(source)
     while i < n:
         ch = source[i]
-        if ch == '"':
-            j = i + 1
-            while j < n and source[j] != '"':
-                if source[j] == "\\":
-                    j += 1
-                j += 1
-            out.append(source[i : j + 1])
-            i = j + 1
-        elif ch == "'":
-            j = i + 1
-            while j < n and source[j] != "'":
-                if source[j] == "\\":
-                    j += 1
-                j += 1
-            out.append(source[i : j + 1])
-            i = j + 1
+        if ch in "\"'":
+            j = skip_string_literal(source, i)
+            out.append(source[i:j])
+            i = j
         elif source.startswith("//", i):
             j = source.find("\n", i)
             i = n if j == -1 else j
@@ -162,13 +174,9 @@ def split_top_level_args(arglist: str) -> List[str]:
     while i < n:
         ch = arglist[i]
         if ch == '"':
-            j = i + 1
-            while j < n and arglist[j] != '"':
-                if arglist[j] == "\\":
-                    j += 1
-                j += 1
-            current.append(arglist[i : j + 1])
-            i = j + 1
+            j = skip_string_literal(arglist, i)
+            current.append(arglist[i:j])
+            i = j
             continue
         if ch in "([{":
             depth += 1
@@ -199,13 +207,17 @@ def parse_literal_arg(arg: str) -> Optional[str]:
     return "".join(unescape_java(piece) for piece in LITERAL_PIECE.findall(arg))
 
 
+DEFINITION_PREFIX = re.compile(
+    r"\b(?:void|private|public|protected|static|final)\s*$"
+)
+
+
 def find_call_sites(source: str, name: str) -> List[Tuple[int, str]]:
     """Returns (offset, arglist) for every call of `name`(...) that is not
     a method definition."""
     sites: List[Tuple[int, str]] = []
     for match in re.finditer(rf"(?<![\w.]){re.escape(name)}\s*\(", source):
-        prefix = source[: match.start()].rstrip()
-        if prefix.endswith(("void", "private", "public", "static", "final")):
+        if DEFINITION_PREFIX.search(source[: match.start()]):
             continue
         depth = 1
         i = match.end()
@@ -213,12 +225,9 @@ def find_call_sites(source: str, name: str) -> List[Tuple[int, str]]:
         while i < len(source) and depth:
             ch = source[i]
             if ch == '"':
-                i += 1
-                while i < len(source) and source[i] != '"':
-                    if source[i] == "\\":
-                        i += 1
-                    i += 1
-            elif ch in "([{":
+                i = skip_string_literal(source, i)
+                continue
+            if ch in "([{":
                 depth += 1
             elif ch in ")]}":
                 depth -= 1
@@ -248,10 +257,7 @@ def detect_base_modes(source: str) -> Dict[str, str]:
         modes[match.group(1)] = "_two"  # LT default
     before = re.search(r"@Before\s+public\s+void\s+\w+\(\)\s*\{(.*?)\n\s*\}", source, re.S)
     if before:
-        for match in re.finditer(
-            r"(\w+)\.setSingleLineBreaksMarksParagraph\((true|false)\)", before.group(1)
-        ):
-            modes[match.group(1)] = "_one" if match.group(2) == "true" else "_two"
+        apply_mode_calls(before.group(1), modes)
     return modes
 
 
@@ -265,11 +271,7 @@ def modes_at(source: str, offset: int, base_modes: Dict[str, str]) -> Dict[str, 
     ]
     method_start = method_starts[-1] if method_starts else 0
     modes = dict(base_modes)
-    for match in re.finditer(
-        r"(\w+)\.setSingleLineBreaksMarksParagraph\((true|false)\)",
-        source[method_start:offset],
-    ):
-        modes[match.group(1)] = "_one" if match.group(2) == "true" else "_two"
+    apply_mode_calls(source[method_start:offset], modes)
     return modes
 
 
@@ -340,8 +342,6 @@ def main() -> None:
     total = 0
     for directory in sys.argv[1:]:
         for path in sorted(Path(directory).rglob("*SentenceTokenizerTest.java")):
-            if path.name == "SRXSentenceTokenizerTest.java":
-                continue  # generic smoke test, no testSplit cases
             result = extract_file(path)
             if result is None:
                 continue

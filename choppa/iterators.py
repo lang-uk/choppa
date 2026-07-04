@@ -386,3 +386,10 @@ class SrxTextIterator(AbstractTextIterator):
 
     def has_next(self) -> bool:
         return self.text_manager.has_more_text() or self.start_position < len(self.text_manager.get_text())
+
+
+# Registry used by the CLI and tooling to select an algorithm by name.
+ITERATORS = {
+    "SrxTextIterator": SrxTextIterator,
+    "AccurateSrxTextIterator": AccurateSrxTextIterator,
+}

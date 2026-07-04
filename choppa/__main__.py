@@ -2,16 +2,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from choppa.srx_parser import SrxDocument
-from choppa.iterators import AbstractTextIterator, AccurateSrxTextIterator, SrxTextIterator
-
-DEFAULT_RULESET = Path(__file__).parent / "data/srx/languagetool_segment.srx"
-SRX_2_XSD = Path(__file__).parent / "data/xsd/srx20.xsd"
-
-ITERATORS = {
-    "SrxTextIterator": SrxTextIterator,
-    "AccurateSrxTextIterator": AccurateSrxTextIterator,
-}
+from choppa import DEFAULT_SRX_RULESET, SRX_2_XSD, SrxDocument
+from choppa.iterators import ITERATORS, AbstractTextIterator
 
 
 def main() -> None:
@@ -40,7 +32,7 @@ def main() -> None:
         "-s",
         "--srx",
         type=Path,
-        default=DEFAULT_RULESET,
+        default=DEFAULT_SRX_RULESET,
         help="SRX 2.0 rules file (default: bundled LanguageTool segment.srx)",
     )
     parser.add_argument(
@@ -56,6 +48,13 @@ def main() -> None:
         default=AbstractTextIterator.DEFAULT_MAX_LOOKBEHIND_CONSTRUCT_LENGTH,
         help="maximum length of a regular expression construct that occurs "
         "in lookbehind (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--buffer-length",
+        type=int,
+        default=AbstractTextIterator.DEFAULT_BUFFER_LENGTH,
+        help="read buffer size for streaming; must be at least as long as "
+        "the longest segment in the text (default: %(default)s)",
     )
     parser.add_argument(
         "--line-by-line",
@@ -79,21 +78,36 @@ def main() -> None:
     if sys.stdin.isatty() and args.input is sys.stdin:
         print("reading from stdin...", file=sys.stderr)
 
-    def segment(text: str) -> None:
-        iterator = iterator_class(
-            document,
-            args.language,
-            text,
-            max_lookbehind_construct_length=args.max_lookbehind_construct_length,
-        )
-        for sentence in iterator:
-            print(sentence)
-
     if args.line_by_line:
         for line in args.input:
-            segment(line.strip())
+            iterator = iterator_class(
+                document,
+                args.language,
+                line.strip(),
+                max_lookbehind_construct_length=args.max_lookbehind_construct_length,
+            )
+            for sentence in iterator:
+                print(sentence)
     else:
-        segment(args.input.read())
+        # SrxTextIterator consumes the input as a stream with a fixed-size
+        # buffer; the accurate iterator only works on full strings.
+        if iterator_class is ITERATORS["SrxTextIterator"]:
+            iterator = iterator_class(
+                document,
+                args.language,
+                args.input,
+                buffer_length=args.buffer_length,
+                max_lookbehind_construct_length=args.max_lookbehind_construct_length,
+            )
+        else:
+            iterator = iterator_class(
+                document,
+                args.language,
+                args.input.read(),
+                max_lookbehind_construct_length=args.max_lookbehind_construct_length,
+            )
+        for sentence in iterator:
+            print(sentence)
 
 
 if __name__ == "__main__":
