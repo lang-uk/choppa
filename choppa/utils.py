@@ -12,9 +12,11 @@ import regex as re  # type: ignore
 # \p{H}/\p{V} match Java's classes exactly, while the regex package's own
 # \h misses U+180E.
 #
-# (?U) is Java's UNICODE_CHARACTER_CLASS inline flag (used by LanguageTool
-# rules to fix the JDK >= 19 \b regression); Python character classes are
-# Unicode-aware by default for str patterns, so the flag is dropped.
+# (?U) is Java's UNICODE_CHARACTER_CLASS inline flag; Python character
+# classes are Unicode-aware by default for str patterns, so it is dropped.
+# The bundled rules no longer carry it -- LanguageTool sets the flag when
+# it compiles them instead -- but older snapshots and third-party rulesets
+# still do.
 JAVA_CONSTRUCT_PATTERN: re.Regex = re.compile(r"\\h|\\v|\\.|\(\?U\)")
 JAVA_CONSTRUCT_REPLACEMENTS = {
     r"\h": r"\p{H}",

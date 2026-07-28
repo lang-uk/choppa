@@ -12,7 +12,7 @@ rules LanguageTool uses — in pure Python.
 - **Identical output.** `SrxTextIterator` is byte-identical to the Java
   original: verified on ~136,000 segments across seven real-world corpora
   (Ukrainian news from three sources, three English novels — zero
-  differences) and on 848 test cases ported from LanguageTool's 24
+  differences) and on 851 test cases ported from LanguageTool's 24
   language test suites. See [Performance and verification](#performance-and-verification).
 - **Fast.** An 11 MB corpus segments in ~5 s vs ~30 s for the Java CLI
   (Apple M1); about 25x faster than choppa 0.9.
@@ -73,7 +73,9 @@ The port replicates `java.util.regex.Matcher` semantics on top of the
 - Java-only constructs in the rules are translated: `\h`/`\v` become
   `\p{H}`/`\p{V}` ([added to regex on our request](https://github.com/mrabarnett/mrab-regex/issues/477)),
   the `(?U)` flag (Java's `UNICODE_CHARACTER_CLASS`) is dropped because
-  Python patterns are Unicode-aware by default, and Java character-class
+  Python patterns are Unicode-aware by default — which is exactly the
+  semantics LanguageTool relies on, since it compiles every rule with
+  that flag set — and Java character-class
   intersections like `[\p{L}&&[^rwn]]` are compiled in the regex module's
   V1 mode;
 - rules are compiled **without** `MULTILINE`, like in Java, so `^` only
@@ -118,15 +120,28 @@ so the engine gap on large inputs is what matters:
 
 In total: ~136,000 segments, zero differences.
 
+Re-verified after the 2026-07-23 rules refresh on ~84,500 further
+segments — uk Wikipedia and Militarny news, the three novels above,
+Catalan and Russian Wikipedia, plus synthetic corpora that separate
+paragraphs with every Unicode whitespace character — again zero
+differences, and now byte-identical under JDK 17, 21 and 24 alike.
+Ukrainian, English and Russian output is unchanged by that refresh;
+Catalan gains sentence breaks from new upstream rules.
+
 To reproduce with your own corpus (LF line endings — Java does not
 normalize CRLF, so make both sides read the same bytes):
 
 ```bash
+# LanguageTool compiles every rule with UNICODE_CHARACTER_CLASS; the
+# 2.0.3 CLI has no option for that, so give it the flag inline instead.
+# Otherwise it uses the JDK defaults (since JDK 19, an ASCII-only \b).
+python scripts/lt_java_srx.py java_ref.srx
+
 # Java ground truth (CLI zip from github.com/loomchild/segment/releases)
-segment-2.0.3/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \
+segment-2.0.3/bin/segment -a ultimate -s java_ref.srx \
     -l uk_two -r -i corpus.txt -o java.txt -e $'\x01'
 
-# choppa: benchmark + byte-level diff
+# choppa: benchmark + byte-level diff (choppa reads the bundled file)
 python scripts/benchmark.py corpus.txt --language uk_two --java java.txt
 ```
 
@@ -155,12 +170,13 @@ exact upstream commit and refresh instructions. You can also pass any SRX
 ```bash
 git clone https://github.com/lang-uk/choppa && cd choppa
 pip install -e .[test]
-pytest tests/            # includes 848 LanguageTool cases for 24 languages
+pytest tests/            # includes 851 LanguageTool cases for 24 languages
 ```
 
 `scripts/benchmark.py` benchmarks segmentation and byte-diffs the output
-against the Java `segment` CLI; `scripts/extract_lt_tests.py` regenerates
-the LanguageTool test fixtures from a LanguageTool checkout.
+against the Java `segment` CLI; `scripts/lt_java_srx.py` prepares the
+rules for that Java side; `scripts/extract_lt_tests.py` regenerates the
+LanguageTool test fixtures from a LanguageTool checkout.
 
 # Copyrights and kudos
 

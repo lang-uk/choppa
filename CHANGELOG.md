@@ -1,5 +1,36 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Bundled `segment.srx` refreshed to the LanguageTool snapshot of
+  2026-07-23 (`61bf3ff8`). Upstream removed the inline `(?U)` flags —
+  it now compiles every rule with `UNICODE_CHARACTER_CLASS` instead —
+  added Catalan sentence-break rules, and rewrote the
+  `ByTwoLineBreaks` rule to spell out ASCII whitespace explicitly.
+  Ukrainian, English and Russian segmentation is unchanged; Catalan
+  gains breaks (`... a X. No és ...`, `... Sargó I. El nom ...`).
+- LanguageTool test fixtures re-extracted at the same commit: 851 cases
+  (was 848; the three new ones cover the Catalan rules).
+
+### Fixed
+
+- Paragraph breaks no longer fire on Unicode whitespace between two
+  newlines (`\n \n`). Python's `\s` is Unicode-aware, so the old
+  `\r?\n\s*\r?\n` rule made choppa break where Java did not — a
+  divergence that never surfaced on the benchmark corpora. Upstream's
+  explicit `[ \t\n\x0B\f\r]*` removes it.
+
+### Added
+
+- `scripts/lt_java_srx.py` — writes the rules with LanguageTool's
+  pattern flags spelled out inline, which segment 2.0.3 cannot be told to
+  use, so the corpus differential and the CI byte-identity gate compare
+  against the semantics LanguageTool actually uses. With it the ground
+  truth is JDK-independent (17, 21 and 24 produce identical output; the
+  pristine file does not).
+
 ## 1.0.0 (2026-07-04)
 
 First feature-complete release, published on PyPI as

@@ -39,9 +39,38 @@ document):
 default ([JDK-8264160](https://bugs.openjdk.org/browse/JDK-8264160)), and
 LanguageTool patched its rules with `(?U)` prefixes to restore Unicode
 behavior. Python was never affected — its default equals pre-JDK-19 (and
-`(?U)`-patched) Java behavior. We verified the JDK question is moot for
-real corpora: JDK 17 and JDK 24 ground truth outputs were identical on
-every corpus we tested.
+`(?U)`-patched) Java behavior.
+
+In July 2026 LanguageTool finished that migration on the code side, and
+stopped relying on the prefixes at all: `SrxTools` passes segment's
+`DEFAULT_PATTERN_FLAGS_PARAMETER` to `SrxTextIterator` with
+`Pattern.UNICODE_CHARACTER_CLASS`, so *every* rule compiles Unicode-aware
+whatever the JDK. The inline `(?U)`s became redundant and were deleted
+from the rules. Unicode-everywhere is therefore not an approximation
+choppa makes — it is the semantics the rules are written against, and
+Python gives it to us for free. (It is also the same knob as choppa's
+`pattern_flags`, one flag over.) Two consequences:
+
+- the translator's `(?U)` removal stays, for rulesets that still carry
+  the prefix (older snapshots, third-party SRX files); the bundled file
+  no longer needs it;
+- the *Java* side of the corpus differential has to be given those flags,
+  or it compares choppa against semantics LanguageTool abandoned. The
+  reference binary has no way to set them — `defaultPatternFlags` landed
+  in segment 2.0.4 and only 2.0.3 was ever released — so
+  `scripts/lt_java_srx.py` writes a copy with `(?U)` prefixed onto every
+  pattern, which compiles to the same thing. That made the ground truth
+  JDK-independent: JDK 17, 21 and 24 now produce byte-identical output,
+  where the pristine file does not.
+
+The same LanguageTool commit rewrote the `ByTwoLineBreaks` rule from
+`\r?\n\s*\r?\n[\t]*` to `\r?\n[ \t\n\x0B\f\r]*\r?\n[\t]*`, pinning that
+one rule back to ASCII whitespace so global `(?U)` would not let a
+paragraph break span an NBSP. That fixed a latent choppa divergence:
+Python's `\s` had always been Unicode-aware, so choppa used to break
+paragraphs on `\n \n` where Java did not — invisible on the six
+benchmark corpora, reproducible in one line, and now pinned by
+`tests/test_paragraph_breaks.py`.
 
 ## The matcher: Java `Matcher` semantics on Python positional matching
 
@@ -141,10 +170,12 @@ Three independent layers, because each catches what the others miss:
    algorithm-structure regressions; the streaming harness found a real
    port bug (missing position reset after buffer shift) the day it was
    added.
-2. **LanguageTool's 24 language suites** (848 cases, auto-extracted from
+2. **LanguageTool's 24 language suites** (851 cases, auto-extracted from
    the Java sources by `scripts/extract_lt_tests.py`) — catches rule
    semantics regressions against the rules' authors' intent.
 3. **Corpus-level byte-diff against the Java binary**
-   (`scripts/benchmark.py --java`) — catches everything else, including
+   (`scripts/benchmark.py --java`, with the Java side loaded through
+   `scripts/lt_java_srx.py`) — catches everything else, including
    divergences no one thought to write a test for. ~136,000 segments,
-   uk + en, zero diffs.
+   uk + en, zero diffs, plus ~84,500 re-verified at the 2026-07-23 rules
+   refresh across uk, en, ca and ru.
