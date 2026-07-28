@@ -54,15 +54,26 @@ jobs:
         run: |
           curl -sfL -o segment.zip https://github.com/loomchild/segment/releases/download/2.0.3/segment-2.0.3.zip
           unzip -q segment.zip
-      - name: Assert bundled rules match the pinned LanguageTool commit
+      - name: Assert the pinned LanguageTool commit still matches our assumptions
+        # Both halves of the contract: the rules themselves, and the flags
+        # LanguageTool compiles them with. A rules refresh that silently
+        # changed the second would leave the gate below measuring nothing.
         run: |
           PINNED=$(tr -d '[:space:]' < choppa/data/srx/LT_COMMIT)
           [[ "$PINNED" =~ ^[0-9a-f]{40}$ ]] || { echo "bad pin: $PINNED"; exit 1; }
-          curl -sfL -o pinned.srx "https://raw.githubusercontent.com/languagetool-org/languagetool/$PINNED/languagetool-core/src/main/resources/org/languagetool/resource/segment.srx"
+          RAW="https://raw.githubusercontent.com/languagetool-org/languagetool/$PINNED"
+          curl -sfL -o pinned.srx "$RAW/languagetool-core/src/main/resources/org/languagetool/resource/segment.srx"
           cmp pinned.srx choppa/data/srx/languagetool_segment.srx
+          curl -sfL -o SrxTools.java "$RAW/languagetool-core/src/main/java/org/languagetool/tokenizers/SrxTools.java"
+          grep -q UNICODE_CHARACTER_CLASS SrxTools.java
       - name: Byte-identity gate vs Java segment
+        # segment 2.0.3 cannot be told to use those flags, so the Java
+        # side gets them inline instead — see scripts/lt_java_srx.py. It
+        # would pass without that on the JDK 17 pinned above, and break on
+        # the next java-version bump. choppa reads the pristine file.
         run: |
-          segment-2.0.3/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \
+          python scripts/lt_java_srx.py java_ref.srx
+          segment-2.0.3/bin/segment -a ultimate -s java_ref.srx \
             -l uk_two -r -i tests/data/ci_corpus/uk_wikipedia.txt -o java.txt -e $'\x01'
           python scripts/benchmark.py tests/data/ci_corpus/uk_wikipedia.txt \
             --language uk_two --java java.txt

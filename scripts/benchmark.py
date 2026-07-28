@@ -8,9 +8,12 @@ Segment a corpus:
     python scripts/benchmark.py corpus.txt --language uk_two --out segments.txt
 
 Compare against Java ground truth (one \\x01-separated file, produced by
-the segment CLI: https://github.com/loomchild/segment/releases):
+the segment CLI: https://github.com/loomchild/segment/releases). The
+Java side must be fed the rules the way LanguageTool loads them, with
+`(?U)` injected into every pattern — see scripts/lt_java_srx.py:
 
-    segment/bin/segment -a ultimate -s choppa/data/srx/languagetool_segment.srx \\
+    python scripts/lt_java_srx.py java_ref.srx
+    segment/bin/segment -a ultimate -s java_ref.srx \\
         -l uk_two -r -i corpus.txt -o java.txt -e $'\\x01'
     python scripts/benchmark.py corpus.txt --language uk_two --java java.txt
 
